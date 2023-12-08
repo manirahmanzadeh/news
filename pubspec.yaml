@@ -52,6 +52,7 @@ dev_dependencies:
   retrofit_generator: ^8.0.5
   floor_generator: ^1.4.2
   build_runner: ^2.4.7
+  change_app_package_name: ^1.1.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

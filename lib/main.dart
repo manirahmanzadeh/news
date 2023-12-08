@@ -5,10 +5,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/src/features/daily_news/presentation/pages/home/daily_news.dart';
 import 'package:news_app/src/injection_container.dart';
 
-import 'config/routes/routes.dart';
-import 'config/theme/app_themes.dart';
-import 'features/daily_news/presentation/bloc/article/remote/remote_article_bloc.dart';
-import 'features/daily_news/presentation/bloc/article/remote/remote_article_event.dart';
+import 'src/config/routes/routes.dart';
+import 'src/config/theme/app_themes.dart';
+import 'src/features/daily_news/presentation/bloc/article/remote/remote_article_bloc.dart';
+import 'src/features/daily_news/presentation/bloc/article/remote/remote_article_event.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
