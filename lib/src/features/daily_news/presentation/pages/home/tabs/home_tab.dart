@@ -1,19 +1,20 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../domain/entities/article.dart';
-import '../../bloc/article/remote/remote_article_bloc.dart';
-import '../../bloc/article/remote/remote_article_state.dart';
-import '../../widgets/article_tile.dart';
 
-class DailyNews extends StatelessWidget {
-  const DailyNews({ Key? key }) : super(key: key);
+import '../../../../domain/entities/article.dart';
+import '../../../bloc/article/remote/remote_article_bloc.dart';
+import '../../../bloc/article/remote/remote_article_state.dart';
+import '../../../widgets/article_tile.dart';
+
+class HomeTab extends StatelessWidget {
+  const HomeTab({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _buildAppbar(context),
-      body: _buildBody() ,
+      body: _buildBody(),
     );
   }
 
@@ -21,9 +22,7 @@ class DailyNews extends StatelessWidget {
     return AppBar(
       title: const Text(
         'Daily News',
-        style: TextStyle(
-            color: Colors.black
-        ),
+        style: TextStyle(color: Colors.black),
       ),
       actions: [
         GestureDetector(
@@ -38,8 +37,8 @@ class DailyNews extends StatelessWidget {
   }
 
   _buildBody() {
-    return BlocBuilder<RemoteArticlesBloc,RemoteArticleState> (
-      builder: (_,state) {
+    return BlocBuilder<RemoteArticlesBloc, RemoteArticleState>(
+      builder: (_, state) {
         if (state is RemoteArticlesLoading) {
           return const Center(child: CupertinoActivityIndicator());
         }
@@ -48,10 +47,10 @@ class DailyNews extends StatelessWidget {
         }
         if (state is RemoteArticlesDone) {
           return ListView.builder(
-            itemBuilder: (context,index){
+            itemBuilder: (context, index) {
               return ArticleWidget(
-                article: state.articles![index] ,
-                onArticlePressed: (article) => _onArticlePressed(context,article),
+                article: state.articles![index],
+                onArticlePressed: (article) => _onArticlePressed(context, article),
               );
             },
             itemCount: state.articles!.length,
@@ -69,5 +68,4 @@ class DailyNews extends StatelessWidget {
   void _onShowSavedArticlesViewTapped(BuildContext context) {
     Navigator.pushNamed(context, '/SavedArticles');
   }
-
 }

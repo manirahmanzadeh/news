@@ -5,7 +5,7 @@ import 'package:news_app/src/features/daily_news/domain/usecases/get_saved_artic
 import 'package:news_app/src/features/daily_news/domain/usecases/remove_article.dart';
 import 'package:news_app/src/features/daily_news/domain/usecases/save_article.dart';
 import 'package:news_app/src/features/daily_news/presentation/bloc/article/local/local_article_bloc.dart';
-import 'package:news_app/src/features/daily_news/presentation/bloc/article/local/local_article_bloc.dart';
+import 'package:news_app/src/features/daily_news/presentation/bloc/home_navbar/nav_bloc.dart';
 
 import 'features/daily_news/data/data_sources/remote/news_api_service.dart';
 import 'features/daily_news/data/repoository/article_repository_impl.dart';
@@ -40,4 +40,6 @@ Future<void> initializeDependencies() async {
   sl.registerFactory<RemoteArticlesBloc>(() => RemoteArticlesBloc(sl()));
 
   sl.registerFactory<LocalArticlesBloc>(() => LocalArticlesBloc(sl(), sl(), sl()));
+
+  sl.registerFactory<NavBloc>(() => NavBloc());
 }
