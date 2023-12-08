@@ -1,0 +1,7 @@
+{
+  "appName": "NomNom",
+  "@appName": {
+    "type": "text",
+    "description": "Apps name"
+  },
+}
