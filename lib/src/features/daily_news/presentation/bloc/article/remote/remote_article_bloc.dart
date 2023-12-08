@@ -7,11 +7,19 @@ import 'package:news_app/src/features/daily_news/presentation/bloc/article/remot
 class RemoteArticlesBloc extends Bloc<RemoteArticlesEvent, RemoteArticleState> {
   final GetArticleUseCase _getArticleUseCase;
 
-  RemoteArticlesBloc(this._getArticleUseCase) : super(const RemoteArticlesLoading()) {
+  RemoteArticlesBloc(
+    this._getArticleUseCase,
+  ) : super(
+          const RemoteArticlesLoading(),
+        ) {
     on<GetArticles>(onGetArticles);
   }
 
   void onGetArticles(GetArticles event, Emitter<RemoteArticleState> emit) async {
+    emit(
+      const RemoteArticlesLoading(),
+    );
+
     final dataState = await _getArticleUseCase();
 
     if (dataState is DataSuccess && dataState.data!.isNotEmpty) {

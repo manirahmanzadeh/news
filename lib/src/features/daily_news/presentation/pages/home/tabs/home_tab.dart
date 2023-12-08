@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:news_app/src/features/daily_news/presentation/bloc/article/remote/remote_article_event.dart';
 
 import '../../../../domain/entities/article.dart';
 import '../../../bloc/article/remote/remote_article_bloc.dart';
@@ -43,7 +44,14 @@ class HomeTab extends StatelessWidget {
           return const Center(child: CupertinoActivityIndicator());
         }
         if (state is RemoteArticlesError) {
-          return const Center(child: Icon(Icons.refresh));
+          return Center(
+            child: Builder(
+              builder: (context) => IconButton(
+                onPressed: () => BlocProvider.of<RemoteArticlesBloc>(context).add(const GetArticles()),
+                icon: const Icon(Icons.refresh),
+              ),
+            ),
+          );
         }
         if (state is RemoteArticlesDone) {
           return ListView.builder(
