@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:news_app/src/core/constants/news_category.dart';
 import 'package:news_app/src/features/daily_news/presentation/bloc/article/remote/remote_article_event.dart';
 
 import '../../../../domain/entities/article.dart';
@@ -47,7 +48,7 @@ class HomeTab extends StatelessWidget {
           return Center(
             child: Builder(
               builder: (context) => IconButton(
-                onPressed: () => BlocProvider.of<RemoteArticlesBloc>(context).add(const GetArticles()),
+                onPressed: () => BlocProvider.of<RemoteArticlesBloc>(context).add(GetArticles(category: NewsCategory.general.category)),
                 icon: const Icon(Icons.refresh),
               ),
             ),

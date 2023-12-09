@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:news_app/src/core/constants/constants.dart';
+import 'package:news_app/src/core/constants/news_category.dart';
 import 'package:news_app/src/features/daily_news/data/data_sources/remote/news_api_service.dart';
 import 'package:news_app/src/features/daily_news/domain/entities/article.dart';
 
@@ -17,11 +18,11 @@ class ArticleRepositoryImpl implements ArticleRepository {
   ArticleRepositoryImpl(this._newsApiService, this._appDatabase);
 
   @override
-  Future<DataState<List<ArticleModel>>> getNewsArticles() async {
+  Future<DataState<List<ArticleModel>>> getNewsArticles(String? category) async {
     try {
       final httpResponse = await _newsApiService.getNewsArticles(
         apiKey: newsAPIKey,
-        category: categoryQuery,
+        category: category ?? NewsCategory.general.category,
         country: countryQuery,
       );
       if (httpResponse.response.statusCode == HttpStatus.ok) {
