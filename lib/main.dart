@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/src/core/constants/news_category.dart';
+import 'package:news_app/src/core/localization/locale_bloc.dart';
 import 'package:news_app/src/features/daily_news/presentation/pages/home/home_page.dart';
 import 'package:news_app/src/injection_container.dart';
 
@@ -20,12 +21,20 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<RemoteArticlesBloc>(
-      create: (context) => sl()..add(GetArticles(category: NewsCategory.general.category)),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<RemoteArticlesBloc>(
+          create: (context) => sl()..add(GetArticles(category: NewsCategory.general.category)),
+        ),
+        BlocProvider<LocaleBloc>(
+          create: (context) => sl(),
+        ),
+      ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        theme: theme(),
+        theme: AppTheme.light,
         onGenerateRoute: AppRoutes.onGenerateRoutes,
+        locale: BlocProvider.of<LocaleBloc>(context).state.locale,
         home: const HomePage(),
       ),
     );
