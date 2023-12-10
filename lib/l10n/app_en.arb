@@ -8,5 +8,15 @@
   "@learnMore": {
     "type": "text",
     "description": "Learn more text"
+  },
+  "breakingNews": "Breaking News",
+  "@breakingNews": {
+    "type": "text",
+    "description": "Breaking News"
+  },
+  "more": "More",
+  "@more": {
+    "type": "text",
+    "description": "More"
   }
 }

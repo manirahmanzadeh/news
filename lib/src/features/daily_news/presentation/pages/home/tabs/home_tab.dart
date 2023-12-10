@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/src/core/constants/news_category.dart';
 import 'package:news_app/src/features/daily_news/data/models/article.dart';
 import 'package:news_app/src/features/daily_news/presentation/bloc/article/remote/remote_article_event.dart';
+import 'package:news_app/src/features/daily_news/presentation/widgets/home/bottom_part.dart';
 import 'package:news_app/src/features/daily_news/presentation/widgets/home/top_part.dart';
 
 import '../../../bloc/article/remote/remote_article_bloc.dart';
@@ -57,10 +58,13 @@ class HomeTab extends StatelessWidget {
           );
         }
         if (state is RemoteArticlesDone) {
-          return Column(
+          return ListView(
             children: [
               TopPart(
                 lastArticle: ArticleModel.fromEntity(state.articles!.last),
+              ),
+              BottomPart(
+                articles: state.articles!,
               ),
             ],
           );

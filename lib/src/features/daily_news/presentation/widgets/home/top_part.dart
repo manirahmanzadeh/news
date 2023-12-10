@@ -15,6 +15,7 @@ class TopPart extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: MediaQuery.sizeOf(context).height / 2,
+      width: MediaQuery.sizeOf(context).width,
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.vertical(
           bottom: Radius.circular(16),
@@ -57,7 +58,7 @@ class TopPart extends StatelessWidget {
                   lastArticle.title!,
                   maxLines: 3,
                   overflow: TextOverflow.ellipsis,
-                  style: Theme.of(context).textTheme.headlineMedium!.copyWith(
+                  style: Theme.of(context).textTheme.displayLarge!.copyWith(
                         color: Colors.white,
                       ),
                 ),
@@ -70,7 +71,7 @@ class TopPart extends StatelessWidget {
                     '${AppLocalizations.of(context)!.learnMore} →',
                     maxLines: 3,
                     overflow: TextOverflow.ellipsis,
-                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                    style: Theme.of(context).textTheme.labelSmall!.copyWith(
                           color: Colors.white,
                         ),
                   ),

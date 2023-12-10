@@ -11,33 +11,55 @@ mixin AppTheme {
           color: Color(0xFF363636),
         ),
         textTheme: const TextTheme(
-          displayLarge: TextStyle(
-            fontSize: 32.0,
-            fontWeight: FontWeight.bold,
-            color: Colors.black,
-          ),
-          displayMedium: TextStyle(
-            fontSize: 28.0,
-            fontWeight: FontWeight.bold,
-            color: Colors.black,
-          ),
-          displaySmall: TextStyle(
-            fontSize: 24.0,
-            fontWeight: FontWeight.bold,
-            color: Colors.black,
-          ),
-          headlineMedium: TextStyle(
-            fontSize: 20.0,
-            fontWeight: FontWeight.bold,
-            color: Colors.black,
-          ),
-          bodyLarge: TextStyle(
-            fontSize: 16.0,
-            color: Colors.black87,
+          titleLarge: TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.w700,
+            color: Color(0xFF474747),
           ),
           bodyMedium: TextStyle(
-            fontSize: 14.0,
-            color: Colors.black54,
+            fontSize: 12,
+            fontWeight: FontWeight.w400,
+            color: Color(0xFF474747),
+          ),
+          bodyLarge: TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.w400,
+            color: Color(0xFF474747),
+          ),
+          bodySmall: TextStyle(
+            fontSize: 10,
+            fontWeight: FontWeight.w400,
+            color: Color(0xFF9F9F9F),
+          ),
+          titleSmall: TextStyle(
+            fontSize: 12,
+            fontWeight: FontWeight.w700,
+            color: Color(0xFF002E3D),
+          ),
+          labelLarge: TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.w400,
+            color: Color(0xFF002E3D),
+          ),
+          displayLarge: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w500,
+            color: Color(0xFF3A3A3A),
+          ),
+          displayMedium: TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.w500,
+            color: Color(0xFF474747),
+          ),
+          displaySmall: TextStyle(
+            fontSize: 12,
+            fontWeight: FontWeight.w500,
+            color: Color(0xFF474747),
+          ),
+          labelSmall: TextStyle(
+            fontSize: 10,
+            fontWeight: FontWeight.w500,
+            color: Color(0xFF474747),
           ),
         ),
       );
