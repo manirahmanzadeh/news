@@ -1,12 +1,11 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/src/core/constants/news_category.dart';
-import 'package:news_app/src/core/localization/locale_bloc.dart';
+import 'package:news_app/src/features/daily_news/data/models/article.dart';
 import 'package:news_app/src/features/daily_news/presentation/bloc/article/remote/remote_article_event.dart';
+import 'package:news_app/src/features/daily_news/presentation/widgets/home/top_part.dart';
 
-import '../../../../domain/entities/article.dart';
 import '../../../bloc/article/remote/remote_article_bloc.dart';
 import '../../../bloc/article/remote/remote_article_state.dart';
 
@@ -17,7 +16,7 @@ class HomeTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _buildAppbar(context),
-      body: _buildBody(),
+      body: _buildBody(context),
     );
   }
 
@@ -39,9 +38,9 @@ class HomeTab extends StatelessWidget {
     );
   }
 
-  _buildBody() {
+  _buildBody(BuildContext context) {
     return BlocBuilder<RemoteArticlesBloc, RemoteArticleState>(
-      builder: (context, state) {
+      builder: (_, state) {
         if (state is RemoteArticlesLoading) {
           return const Center(child: CupertinoActivityIndicator());
         }
@@ -60,62 +59,15 @@ class HomeTab extends StatelessWidget {
         if (state is RemoteArticlesDone) {
           return Column(
             children: [
-              _buildBodyTopPart(context, state),
+              TopPart(
+                lastArticle: ArticleModel.fromEntity(state.articles!.last),
+              ),
             ],
           );
         }
         return const SizedBox();
       },
     );
-  }
-
-  Widget _buildBodyTopPart(BuildContext context, RemoteArticleState state) {
-    final lastArticle = state.articles!.last;
-    return Container(
-      height: MediaQuery.sizeOf(context).height / 2,
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        borderRadius: const BorderRadius.vertical(
-          bottom: Radius.circular(16),
-        ),
-        boxShadow: const [
-          BoxShadow(
-            color: Colors.black12,
-            spreadRadius: 2,
-            blurRadius: 4,
-          ),
-        ],
-        image: DecorationImage(
-          image: CachedNetworkImageProvider(lastArticle.urlToImage!),
-          fit: BoxFit.cover,
-        ),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          Text(
-            lastArticle.title!,
-            maxLines: 3,
-            overflow: TextOverflow.ellipsis,
-            style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                  color: Colors.white,
-                ),
-          ),
-          Text(
-            context.localizations.learnMore,
-            maxLines: 3,
-            overflow: TextOverflow.ellipsis,
-            style: Theme.of(context).textTheme.titleLarge!.copyWith(
-              color: Colors.white,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  void _onArticlePressed(BuildContext context, ArticleEntity article) {
-    Navigator.pushNamed(context, '/ArticleDetails', arguments: article);
   }
 
   void _onShowSavedArticlesViewTapped(BuildContext context) {

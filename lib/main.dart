@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:news_app/src/core/constants/news_category.dart';
 import 'package:news_app/src/core/localization/locale_bloc.dart';
+import 'package:news_app/src/core/localization/locale_eevent.dart';
+import 'package:news_app/src/core/localization/locale_state.dart';
 import 'package:news_app/src/features/daily_news/presentation/pages/home/home_page.dart';
 import 'package:news_app/src/injection_container.dart';
 
@@ -27,15 +30,19 @@ class App extends StatelessWidget {
           create: (context) => sl()..add(GetArticles(category: NewsCategory.general.category)),
         ),
         BlocProvider<LocaleBloc>(
-          create: (context) => sl(),
+          create: (context) => sl()..add(const ChangeLocaleEvent(locale: Locale('en'))),
         ),
       ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: AppTheme.light,
-        onGenerateRoute: AppRoutes.onGenerateRoutes,
-        locale: BlocProvider.of<LocaleBloc>(context).state.locale,
-        home: const HomePage(),
+      child: BlocBuilder<LocaleBloc, LocaleState>(
+        builder: (_, state) => MaterialApp(
+          debugShowCheckedModeBanner: false,
+          theme: AppTheme.light,
+          onGenerateRoute: AppRoutes.onGenerateRoutes,
+          locale: state.locale,
+          supportedLocales: AppLocalizations.supportedLocales,
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          home: const HomePage(),
+        ),
       ),
     );
   }
