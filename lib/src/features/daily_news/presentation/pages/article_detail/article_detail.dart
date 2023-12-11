@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:news_app/src/core/util/date_time_formatter.dart';
 
 import '../../../../../injection_container.dart';
 import '../../../domain/entities/article.dart';
@@ -69,7 +70,7 @@ class ArticleDetailsView extends HookWidget {
               const Icon(Ionicons.time_outline, size: 16),
               const SizedBox(width: 4),
               Text(
-                article!.publishedAt!,
+                formatTimeDifference(article!.publishedAt!),
                 style: const TextStyle(fontSize: 12),
               ),
             ],
@@ -87,7 +88,7 @@ class ArticleDetailsView extends HookWidget {
       child: CachedNetworkImage(
         imageUrl: article!.urlToImage ?? '',
         fit: BoxFit.cover,
-        errorWidget: (_,__,___) => const Center(
+        errorWidget: (_, __, ___) => const Center(
           child: Icon(Icons.error),
         ),
       ),

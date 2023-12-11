@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:news_app/src/core/util/date_time_formatter.dart';
 
 import '../../domain/entities/article.dart';
 
@@ -117,7 +118,7 @@ class ArticleWidget extends StatelessWidget {
               children: [
                 const Icon(Icons.timeline_outlined, size: 10),
                 const SizedBox(width: 4),
-                Text(article!.publishedAt!, style: Theme.of(context).textTheme.labelSmall),
+                Text(formatTimeDifference(article!.publishedAt!), style: Theme.of(context).textTheme.labelSmall),
               ],
             ),
           ],

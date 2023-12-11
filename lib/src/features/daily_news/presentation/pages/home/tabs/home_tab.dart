@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:news_app/src/core/constants/news_category.dart';
 import 'package:news_app/src/features/daily_news/data/models/article.dart';
 import 'package:news_app/src/features/daily_news/presentation/bloc/article/remote/remote_article_event.dart';
 import 'package:news_app/src/features/daily_news/presentation/widgets/home/bottom_part.dart';
 import 'package:news_app/src/features/daily_news/presentation/widgets/home/top_part.dart';
 
+import '../../../../domain/enums/news_category.dart';
 import '../../../bloc/article/remote/remote_article_bloc.dart';
 import '../../../bloc/article/remote/remote_article_state.dart';
 
