@@ -8,7 +8,7 @@
 // import '../../bloc/article/local/local_article_bloc.dart';
 // import '../../bloc/article/local/local_article_event.dart';
 // import '../../bloc/article/local/local_article_state.dart';
-// import '../../widgets/article_tile.dart';
+// import '../../components/article_tile.dart';
 //
 // class SavedArticles extends HookWidget {
 //   const SavedArticles({Key ? key}) : super(key: key);

@@ -8,9 +8,6 @@ import 'package:news_app/src/injection_container.dart';
 
 import 'src/config/routes/routes.dart';
 import 'src/config/theme/app_themes.dart';
-import 'src/features/daily_news/domain/enums/news_category.dart';
-import 'src/features/daily_news/presentation/bloc/article/remote/remote_article_bloc.dart';
-import 'src/features/daily_news/presentation/bloc/article/remote/remote_article_event.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,15 +20,8 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider<RemoteArticlesBloc>(
-          create: (context) => sl()..add(GetArticles(category: NewsCategory.general.category)),
-        ),
-        BlocProvider<LocaleBloc>(
-          create: (context) => sl()..add(const ChangeLocaleEvent(locale: Locale('en'))),
-        ),
-      ],
+    return BlocProvider<LocaleBloc>(
+      create: (context) => sl()..add(const ChangeLocaleEvent(locale: Locale('en'))),
       child: BlocBuilder<LocaleBloc, LocaleState>(
         builder: (_, state) => MaterialApp(
           debugShowCheckedModeBanner: false,
