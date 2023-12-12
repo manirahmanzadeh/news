@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+import 'package:news_app/src/core/localization/locale_bloc.dart';
 import 'package:news_app/src/features/daily_news/data/data_sources/local/app_database.dart';
 import 'package:news_app/src/features/daily_news/domain/usecases/get_saved_article.dart';
 import 'package:news_app/src/features/daily_news/domain/usecases/remove_article.dart';
@@ -42,4 +43,6 @@ Future<void> initializeDependencies() async {
   sl.registerFactory<LocalArticlesBloc>(() => LocalArticlesBloc(sl(), sl(), sl()));
 
   sl.registerFactory<NavBloc>(() => NavBloc());
+
+  sl.registerFactory<LocaleBloc>(() => LocaleBloc());
 }

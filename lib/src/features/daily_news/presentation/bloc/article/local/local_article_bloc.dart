@@ -1,5 +1,4 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:news_app/src/core/resources/data_state.dart';
 import 'package:news_app/src/features/daily_news/domain/usecases/get_saved_article.dart';
 import 'package:news_app/src/features/daily_news/domain/usecases/remove_article.dart';
 import 'package:news_app/src/features/daily_news/domain/usecases/save_article.dart';

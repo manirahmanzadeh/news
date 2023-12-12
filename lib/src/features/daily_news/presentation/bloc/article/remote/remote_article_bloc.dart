@@ -20,7 +20,7 @@ class RemoteArticlesBloc extends Bloc<RemoteArticlesEvent, RemoteArticleState> {
       const RemoteArticlesLoading(),
     );
 
-    final dataState = await _getArticleUseCase();
+    final dataState = await _getArticleUseCase(params: event.category);
 
     if (dataState is DataSuccess && dataState.data!.isNotEmpty) {
       emit(

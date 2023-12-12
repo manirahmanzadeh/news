@@ -6,6 +6,7 @@ import 'package:news_app/src/features/daily_news/data/data_sources/remote/news_a
 import 'package:news_app/src/features/daily_news/domain/entities/article.dart';
 
 import '../../../../core/resources/data_state.dart';
+import '../../domain/enums/news_category.dart';
 import '../../domain/repository/article_repository.dart';
 import '../data_sources/local/app_database.dart';
 import '../models/article.dart';
@@ -17,22 +18,28 @@ class ArticleRepositoryImpl implements ArticleRepository {
   ArticleRepositoryImpl(this._newsApiService, this._appDatabase);
 
   @override
-  Future<DataState<List<ArticleModel>>> getNewsArticles() async {
+  Future<DataState<List<ArticleModel>>> getNewsArticles(String? category) async {
     try {
       final httpResponse = await _newsApiService.getNewsArticles(
         apiKey: newsAPIKey,
-        category: categoryQuery,
+        category: category ?? NewsCategory.general.category,
         country: countryQuery,
       );
       if (httpResponse.response.statusCode == HttpStatus.ok) {
-        return DataSuccess(httpResponse.data);
+        final articlesList = httpResponse.data
+            .where(
+              (element) => element.title != '[Removed]' && element.urlToImage != null,
+            )
+            .toList();
+        return DataSuccess(articlesList);
       } else {
         return DataFailed(
           DioException(
-              requestOptions: httpResponse.response.requestOptions,
-              error: httpResponse.response.statusMessage,
-              type: DioExceptionType.badResponse,
-              response: httpResponse.response),
+            requestOptions: httpResponse.response.requestOptions,
+            error: httpResponse.response.statusMessage,
+            type: DioExceptionType.badResponse,
+            response: httpResponse.response,
+          ),
         );
       }
     } on DioException catch (e) {

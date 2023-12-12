@@ -1,10 +1,9 @@
-
 import '../../../../core/resources/data_state.dart';
 import '../entities/article.dart';
 
 abstract class ArticleRepository {
   // API methods
-  Future<DataState<List<ArticleEntity>>> getNewsArticles();
+  Future<DataState<List<ArticleEntity>>> getNewsArticles(String? category);
 
   //Database methods
   Future<List<ArticleEntity>> getSavedArticles();
@@ -12,5 +11,4 @@ abstract class ArticleRepository {
   Future<void> saveArticle(ArticleEntity article);
 
   Future<void> removeArticle(ArticleEntity article);
-
 }
