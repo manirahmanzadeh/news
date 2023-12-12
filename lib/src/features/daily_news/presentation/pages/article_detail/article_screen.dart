@@ -65,14 +65,14 @@ class _NewsBody extends StatelessWidget {
                   ),
                   const SizedBox(width: 10),
                   SizedBox(
-                    width: MediaQuery.sizeOf(context).width/2,
+                    width: MediaQuery.sizeOf(context).width / 2,
                     child: Text(
                       article.author!,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                        color: Colors.white,
-                      ),
+                            color: Colors.white,
+                          ),
                     ),
                   ),
                 ],
@@ -86,10 +86,7 @@ class _NewsBody extends StatelessWidget {
                     color: Colors.grey,
                   ),
                   const SizedBox(width: 10),
-                  Text(
-                    '${DateTime.now().difference(article.publishedAt!).inHours}h',
-                    style: Theme.of(context).textTheme.bodyMedium,
-                  ),
+                  Text('${DateTime.now().difference(article.publishedAt!).inHours}h', style: Theme.of(context).textTheme.bodyMedium),
                 ],
               ),
               // const SizedBox(width: 10),
