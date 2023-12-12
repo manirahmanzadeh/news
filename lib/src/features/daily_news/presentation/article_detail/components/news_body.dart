@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/src/core/components/custom_tag.dart';
 import 'package:news_app/src/core/components/image_container.dart';
 import 'package:news_app/src/features/daily_news/domain/entities/article.dart';
+import 'package:news_app/src/features/daily_news/presentation/article_detail/bloc/article_detail_bloc.dart';
+import 'package:news_app/src/features/daily_news/presentation/article_detail/bloc/article_detail_event.dart';
 
 class NewsBody extends StatelessWidget {
   const NewsBody({
@@ -23,6 +26,7 @@ class NewsBody extends StatelessWidget {
         color: Colors.white,
       ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
@@ -72,6 +76,13 @@ class NewsBody extends StatelessWidget {
           Text(
             article.content!,
             style: Theme.of(context).textTheme.bodyMedium!.copyWith(height: 1.5),
+          ),
+          InkWell(
+            onTap: () => BlocProvider.of<ArticleDetailBloc>(context).add(const OpenArticleUrlDetailEvent()),
+            child: Text(
+              'Learn More',
+              style: Theme.of(context).textTheme.bodyMedium!.copyWith(height: 1.5, color: Colors.blue),
+            ),
           ),
           const SizedBox(height: 20),
           GridView.builder(
