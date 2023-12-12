@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:news_app/src/features/daily_news/presentation/pages/discover/bloc/discover_bloc.dart';
+import 'package:news_app/src/features/daily_news/presentation/pages/discover/bloc/discover_event.dart';
 
 import '../../../../../core/components/bottom_nav_bar.dart';
 import '../../../../../injection_container.dart';
 import '../../../domain/enums/news_category_enum.dart';
-import '../../bloc/article/remote/remote_article_bloc.dart';
-import '../../bloc/article/remote/remote_article_event.dart';
 import 'components/category_news.dart';
 import 'components/discover_news.dart';
 
@@ -16,8 +16,8 @@ class DiscoverScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<RemoteArticlesBloc>(
-      create: (context) => sl()..add(GetArticles(category: NewsCategoryEnum.health.category)),
+    return BlocProvider<DiscoverBloc>(
+      create: (context) => sl()..add(GetArticlesDiscoverEvent(initialCategory: NewsCategoryEnum.health.category)),
       child: const _DiscoverScreen(),
     );
   }

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:news_app/src/features/daily_news/presentation/pages/home/bloc/home_bloc.dart';
+import 'package:news_app/src/features/daily_news/presentation/pages/home/bloc/home_state.dart';
 
 import '../../../../../../core/components/article/article_tile_wide.dart';
-import '../../../bloc/article/remote/remote_article_bloc.dart';
-import '../../../bloc/article/remote/remote_article_state.dart';
 
 class BreakingNews extends StatelessWidget {
   const BreakingNews({
@@ -12,9 +12,9 @@ class BreakingNews extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<RemoteArticlesBloc, RemoteArticleState>(
+    return BlocBuilder<HomeBloc, HomeState>(
       builder: (_, state) {
-        if (state is RemoteArticlesLoading) {
+        if (state is LoadingHomeState) {
           return const Center(
             child: CircularProgressIndicator(),
           );

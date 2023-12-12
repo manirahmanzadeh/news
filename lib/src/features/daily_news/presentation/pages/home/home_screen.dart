@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:news_app/src/features/daily_news/presentation/bloc/article/remote/remote_article_bloc.dart';
+import 'package:news_app/src/features/daily_news/presentation/pages/home/bloc/home_bloc.dart';
+import 'package:news_app/src/features/daily_news/presentation/pages/home/bloc/home_event.dart';
 import 'package:news_app/src/features/daily_news/presentation/pages/home/components/breaking_news.dart';
 
 import '../../../../../core/components/bottom_nav_bar.dart';
 import '../../../../../injection_container.dart';
-import '../../../domain/enums/news_category_enum.dart';
-import '../../bloc/article/remote/remote_article_event.dart';
 import 'components/news_of_day.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -16,8 +15,8 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<RemoteArticlesBloc>(
-      create: (context) => sl()..add(GetArticles(category: NewsCategoryEnum.general.category)),
+    return BlocProvider<HomeBloc>(
+      create: (context) => sl()..add(const GetArticlesHomeEvent()),
       child: const _HomeScreen(),
     );
   }

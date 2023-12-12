@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:news_app/src/features/daily_news/presentation/pages/home/bloc/home_bloc.dart';
+import 'package:news_app/src/features/daily_news/presentation/pages/home/bloc/home_state.dart';
 
 import '../../../../../../core/components/custom_tag.dart';
 import '../../../../../../core/components/image_container.dart';
-import '../../../bloc/article/remote/remote_article_bloc.dart';
-import '../../../bloc/article/remote/remote_article_state.dart';
 
 class NewsOfTheDay extends StatelessWidget {
   const NewsOfTheDay({
@@ -13,9 +13,9 @@ class NewsOfTheDay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<RemoteArticlesBloc, RemoteArticleState>(
+    return BlocBuilder<HomeBloc, HomeState>(
       builder: (_, state) {
-        if (state is RemoteArticlesLoading) {
+        if (state is LoadingHomeState) {
           return const Center(
             child: CircularProgressIndicator(),
           );

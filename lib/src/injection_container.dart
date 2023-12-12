@@ -7,12 +7,13 @@ import 'package:news_app/src/features/daily_news/domain/usecases/remove_article.
 import 'package:news_app/src/features/daily_news/domain/usecases/save_article.dart';
 import 'package:news_app/src/features/daily_news/presentation/bloc/article/local/local_article_bloc.dart';
 import 'package:news_app/src/features/daily_news/presentation/bloc/home_navbar/nav_bloc.dart';
+import 'package:news_app/src/features/daily_news/presentation/pages/discover/bloc/discover_bloc.dart';
+import 'package:news_app/src/features/daily_news/presentation/pages/home/bloc/home_bloc.dart';
 
 import 'features/daily_news/data/data_sources/remote/news_api_service.dart';
 import 'features/daily_news/data/repoository/article_repository_impl.dart';
 import 'features/daily_news/domain/repository/article_repository.dart';
 import 'features/daily_news/domain/usecases/get_article.dart';
-import 'features/daily_news/presentation/bloc/article/remote/remote_article_bloc.dart';
 
 final sl = GetIt.instance;
 
@@ -38,7 +39,9 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<RemoveArticleUseCase>(RemoveArticleUseCase(sl()));
 
   ///Blocs
-  sl.registerFactory<RemoteArticlesBloc>(() => RemoteArticlesBloc(sl()));
+  sl.registerFactory<HomeBloc>(() => HomeBloc(sl()));
+
+  sl.registerFactory<DiscoverBloc>(() => DiscoverBloc(sl()));
 
   sl.registerFactory<LocalArticlesBloc>(() => LocalArticlesBloc(sl(), sl(), sl()));
 
