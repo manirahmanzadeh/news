@@ -26,14 +26,20 @@ class ArticleRepositoryImpl implements ArticleRepository {
         country: countryQuery,
       );
       if (httpResponse.response.statusCode == HttpStatus.ok) {
-        return DataSuccess(httpResponse.data);
+        final articlesList = httpResponse.data
+            .where(
+              (element) => element.title != '[Removed]' && element.urlToImage != null,
+            )
+            .toList();
+        return DataSuccess(articlesList);
       } else {
         return DataFailed(
           DioException(
-              requestOptions: httpResponse.response.requestOptions,
-              error: httpResponse.response.statusMessage,
-              type: DioExceptionType.badResponse,
-              response: httpResponse.response),
+            requestOptions: httpResponse.response.requestOptions,
+            error: httpResponse.response.statusMessage,
+            type: DioExceptionType.badResponse,
+            response: httpResponse.response,
+          ),
         );
       }
     } on DioException catch (e) {
