@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:news_app/src/features/daily_news/presentation/pages/home/bloc/home_bloc.dart';
-import 'package:news_app/src/features/daily_news/presentation/pages/home/bloc/home_state.dart';
+import 'package:news_app/src/core/components/article/article_tile_wide.dart';
 
-import '../../../../../../core/components/article/article_tile_wide.dart';
+import '../bloc/home_bloc.dart';
+import '../bloc/home_state.dart';
 
 class BreakingNews extends StatelessWidget {
   const BreakingNews({

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-
-import '../../../../../../core/components/custom_tag.dart';
-import '../../../../../../core/components/image_container.dart';
-import '../../../../domain/entities/article.dart';
+import 'package:news_app/src/core/components/custom_tag.dart';
+import 'package:news_app/src/core/components/image_container.dart';
+import 'package:news_app/src/features/daily_news/domain/entities/article.dart';
 
 class NewsBody extends StatelessWidget {
   const NewsBody({
@@ -62,21 +61,6 @@ class NewsBody extends StatelessWidget {
                   Text('${DateTime.now().difference(article.publishedAt!).inHours}h', style: Theme.of(context).textTheme.bodyMedium),
                 ],
               ),
-              // const SizedBox(width: 10),
-              // CustomTag(
-              //   backgroundColor: Colors.grey.shade200,
-              //   children: [
-              //     const Icon(
-              //       Icons.remove_red_eye,
-              //       color: Colors.grey,
-              //     ),
-              //     const SizedBox(width: 10),
-              //     Text(
-              //       '${article.views}',
-              //       style: Theme.of(context).textTheme.bodyMedium,
-              //     ),
-              //   ],
-              // ),
             ],
           ),
           const SizedBox(height: 20),

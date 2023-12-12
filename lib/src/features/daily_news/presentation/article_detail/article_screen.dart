@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/src/core/components/image_container.dart';
 import 'package:news_app/src/features/daily_news/domain/entities/article.dart';
 
-import '../../../../../core/components/image_container.dart';
 import 'components/news_body.dart';
 import 'components/news_headline.dart';
 

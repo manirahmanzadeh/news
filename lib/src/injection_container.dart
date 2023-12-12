@@ -1,14 +1,13 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+import 'package:news_app/src/core/bloc/article/local/local_article_bloc.dart';
 import 'package:news_app/src/core/localization/locale_bloc.dart';
 import 'package:news_app/src/features/daily_news/data/data_sources/local/app_database.dart';
 import 'package:news_app/src/features/daily_news/domain/usecases/get_saved_article.dart';
 import 'package:news_app/src/features/daily_news/domain/usecases/remove_article.dart';
 import 'package:news_app/src/features/daily_news/domain/usecases/save_article.dart';
-import 'package:news_app/src/features/daily_news/presentation/bloc/article/local/local_article_bloc.dart';
-import 'package:news_app/src/features/daily_news/presentation/bloc/home_navbar/nav_bloc.dart';
-import 'package:news_app/src/features/daily_news/presentation/pages/discover/bloc/discover_bloc.dart';
-import 'package:news_app/src/features/daily_news/presentation/pages/home/bloc/home_bloc.dart';
+import 'package:news_app/src/features/daily_news/presentation/discover/bloc/discover_bloc.dart';
+import 'package:news_app/src/features/daily_news/presentation/home/bloc/home_bloc.dart';
 
 import 'features/daily_news/data/data_sources/remote/news_api_service.dart';
 import 'features/daily_news/data/repoository/article_repository_impl.dart';
@@ -44,8 +43,6 @@ Future<void> initializeDependencies() async {
   sl.registerFactory<DiscoverBloc>(() => DiscoverBloc(sl()));
 
   sl.registerFactory<LocalArticlesBloc>(() => LocalArticlesBloc(sl(), sl(), sl()));
-
-  sl.registerFactory<NavBloc>(() => NavBloc());
 
   sl.registerFactory<LocaleBloc>(() => LocaleBloc());
 }

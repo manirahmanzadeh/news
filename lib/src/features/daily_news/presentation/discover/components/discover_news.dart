@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:news_app/src/features/daily_news/presentation/pages/discover/bloc/discover_bloc.dart';
-import 'package:news_app/src/features/daily_news/presentation/pages/discover/bloc/discover_event.dart';
+
+import '../bloc/discover_bloc.dart';
+import '../bloc/discover_event.dart';
 
 class DiscoverNews extends StatelessWidget {
   const DiscoverNews({

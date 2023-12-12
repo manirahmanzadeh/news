@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:news_app/src/features/daily_news/presentation/pages/home/bloc/home_bloc.dart';
-import 'package:news_app/src/features/daily_news/presentation/pages/home/bloc/home_state.dart';
+import 'package:news_app/src/core/components/custom_tag.dart';
+import 'package:news_app/src/core/components/image_container.dart';
 
-import '../../../../../../core/components/custom_tag.dart';
-import '../../../../../../core/components/image_container.dart';
+import '../bloc/home_bloc.dart';
+import '../bloc/home_state.dart';
 
 class NewsOfTheDay extends StatelessWidget {
   const NewsOfTheDay({

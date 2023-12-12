@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/src/core/components/image_container.dart';
 import 'package:news_app/src/features/daily_news/domain/entities/article.dart';
-
-import '../../../features/daily_news/presentation/pages/article_detail/article_screen.dart';
-import '../image_container.dart';
+import 'package:news_app/src/features/daily_news/presentation/article_detail/article_screen.dart';
 
 class ArticleTileWide extends StatelessWidget {
   const ArticleTileWide({

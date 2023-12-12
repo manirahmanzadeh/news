@@ -1,10 +1,10 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/src/core/resources/data_state.dart';
+import 'package:news_app/src/features/daily_news/domain/enums/news_category_enum.dart';
 import 'package:news_app/src/features/daily_news/domain/usecases/get_article.dart';
-import 'package:news_app/src/features/daily_news/presentation/pages/home/bloc/home_event.dart';
-import 'package:news_app/src/features/daily_news/presentation/pages/home/bloc/home_state.dart';
 
-import '../../../../domain/enums/news_category_enum.dart';
+import 'home_event.dart';
+import 'home_state.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final GetArticleUseCase _getArticleUseCase;

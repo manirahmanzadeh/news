@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
-
-import '../../../../domain/entities/article.dart';
+import 'package:news_app/src/features/daily_news/domain/entities/article.dart';
 
 abstract class HomeState extends Equatable {
   final List<ArticleEntity>? articles;

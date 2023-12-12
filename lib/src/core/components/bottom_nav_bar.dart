@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:news_app/src/features/daily_news/presentation/pages/home/account_screen.dart';
-
-import '../../features/daily_news/presentation/pages/discover/discover_screen.dart';
-import '../../features/daily_news/presentation/pages/home/home_screen.dart';
+import 'package:news_app/src/features/daily_news/presentation/discover/screens/discover_screen.dart';
+import 'package:news_app/src/features/daily_news/presentation/home/screens/account_screen.dart';
+import 'package:news_app/src/features/daily_news/presentation/home/screens/home_screen.dart';
 
 class BottomNavBar extends StatelessWidget {
   const BottomNavBar({

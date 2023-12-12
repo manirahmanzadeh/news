@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:news_app/src/features/daily_news/presentation/pages/home/bloc/home_bloc.dart';
-import 'package:news_app/src/features/daily_news/presentation/pages/home/bloc/home_event.dart';
-import 'package:news_app/src/features/daily_news/presentation/pages/home/components/breaking_news.dart';
+import 'package:news_app/src/core/components/bottom_nav_bar.dart';
+import 'package:news_app/src/injection_container.dart';
 
-import '../../../../../core/components/bottom_nav_bar.dart';
-import '../../../../../injection_container.dart';
-import 'components/news_of_day.dart';
+import '../bloc/home_bloc.dart';
+import '../bloc/home_event.dart';
+import '../components/breaking_news.dart';
+import '../components/news_of_day.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});

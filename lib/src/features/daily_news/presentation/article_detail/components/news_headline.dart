@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../../../../domain/entities/article.dart';
+import 'package:news_app/src/features/daily_news/domain/entities/article.dart';
 
 class NewsHeadline extends StatelessWidget {
   const NewsHeadline({
@@ -21,18 +20,6 @@ class NewsHeadline extends StatelessWidget {
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.15,
           ),
-          // CustomTag(
-          //   backgroundColor: Colors.grey.withAlpha(150),
-          //   children: [
-          //     Text(
-          //       article.category,
-          //       style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-          //         color: Colors.white,
-          //       ),
-          //     ),
-          //   ],
-          // ),
-          // const SizedBox(height: 10),
           Text(
             article.title ?? 'Title',
             style: Theme.of(context).textTheme.headlineSmall!.copyWith(
