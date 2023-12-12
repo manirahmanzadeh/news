@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:news_app/src/features/daily_news/presentation/bloc/article/remote/remote_article_bloc.dart';
+import 'package:news_app/src/features/daily_news/presentation/bloc/article/remote/remote_article_event.dart';
 
 class DiscoverNews extends StatelessWidget {
   const DiscoverNews({
@@ -24,6 +27,10 @@ class DiscoverNews extends StatelessWidget {
           ),
           const SizedBox(height: 20),
           TextFormField(
+            onChanged: (value) {
+              BlocProvider.of<RemoteArticlesBloc>(context).add(ChangeQ(q: value));
+            },
+            controller: BlocProvider.of<RemoteArticlesBloc>(context).searchTextField,
             decoration: InputDecoration(
               hintText: 'Search',
               fillColor: Colors.grey.shade200,
