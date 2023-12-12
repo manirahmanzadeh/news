@@ -1,17 +1,42 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/components/bottom_nav_bar.dart';
+import '../../../../../injection_container.dart';
+import '../../../domain/enums/news_category_enum.dart';
+import '../../bloc/article/remote/remote_article_bloc.dart';
+import '../../bloc/article/remote/remote_article_event.dart';
 import 'components/category_news.dart';
 import 'components/discover_news.dart';
 
 class DiscoverScreen extends StatelessWidget {
-  const DiscoverScreen({Key? key}) : super(key: key);
+  const DiscoverScreen({super.key});
 
   static const routeName = '/discover';
 
   @override
   Widget build(BuildContext context) {
-    List<String> tabs = ['Health', 'Politics', 'Art', 'Food', 'Science'];
+    return BlocProvider<RemoteArticlesBloc>(
+      create: (context) => sl()..add(GetArticles(category: NewsCategoryEnum.health.category)),
+      child: const _DiscoverScreen(),
+    );
+  }
+}
+
+class _DiscoverScreen extends StatelessWidget {
+  const _DiscoverScreen({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    List<NewsCategoryEnum> tabs = [
+      NewsCategoryEnum.health,
+      NewsCategoryEnum.business,
+      NewsCategoryEnum.entertainment,
+      NewsCategoryEnum.science,
+      NewsCategoryEnum.sports,
+      NewsCategoryEnum.technology,
+      NewsCategoryEnum.general,
+    ];
 
     return DefaultTabController(
       initialIndex: 0,

@@ -5,7 +5,7 @@ import 'package:news_app/src/features/daily_news/presentation/pages/home/compone
 
 import '../../../../../core/components/bottom_nav_bar.dart';
 import '../../../../../injection_container.dart';
-import '../../../domain/enums/news_category.dart';
+import '../../../domain/enums/news_category_enum.dart';
 import '../../bloc/article/remote/remote_article_event.dart';
 import 'components/news_of_day.dart';
 
@@ -17,7 +17,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<RemoteArticlesBloc>(
-      create: (context) => sl()..add(GetArticles(category: NewsCategory.general.category)),
+      create: (context) => sl()..add(GetArticles(category: NewsCategoryEnum.general.category)),
       child: const _HomeScreen(),
     );
   }
