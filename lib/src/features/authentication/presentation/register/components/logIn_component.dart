@@ -2,13 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class LogInButtonComponent extends StatelessWidget {
-  const LogInButtonComponent({Key? key, required this.icon, required this.title}) : super(key: key);
+  const LogInButtonComponent({
+    Key? key,
+    required this.icon,
+    required this.title,
+    required this.onTap,
+  }) : super(key: key);
   final String title;
   final String icon;
+  final Function() onTap;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
           borderRadius: const BorderRadius.all(

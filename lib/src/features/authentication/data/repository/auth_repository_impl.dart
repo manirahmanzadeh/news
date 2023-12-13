@@ -36,4 +36,14 @@ class AuthRepositoryImpl implements AuthRepository {
   Future<void> sendRecoveryEmail(String email) {
     return _authService.sendRecoveryEmail(email: email);
   }
+
+  @override
+  Future<void> signIngWithFacebook() {
+    return _authService.signInWithFacebook();
+  }
+
+  @override
+  Future<void> signIngWithGoogle() {
+    return _authService.signInWithGoogle();
+  }
 }

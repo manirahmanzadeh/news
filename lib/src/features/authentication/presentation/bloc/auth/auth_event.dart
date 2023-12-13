@@ -45,3 +45,19 @@ class SendRecoveryEmailAuthEvent extends AuthEvent {
     required this.context,
   });
 }
+
+class SignInWithGoogleAuthEvent extends AuthEvent {
+  final BuildContext context;
+
+  const SignInWithGoogleAuthEvent({
+    required this.context,
+  });
+}
+
+class SignInWithFacebookAuthEvent extends AuthEvent {
+  final BuildContext context;
+
+  const SignInWithFacebookAuthEvent({
+    required this.context,
+  });
+}

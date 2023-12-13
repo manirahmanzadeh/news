@@ -12,4 +12,8 @@ abstract class AuthRepository {
   User? getCurrentUser();
 
   Future<void> sendRecoveryEmail(String email);
+
+  Future<void> signIngWithGoogle();
+
+  Future<void> signIngWithFacebook();
 }

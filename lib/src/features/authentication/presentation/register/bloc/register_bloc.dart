@@ -87,6 +87,22 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
     }
   }
 
+  signInWithGoogle() {
+    BlocProvider.of<AuthBloc>(context).add(
+      SignInWithGoogleAuthEvent(
+        context: context,
+      ),
+    );
+  }
+
+  signInWithFacebook() {
+    BlocProvider.of<AuthBloc>(context).add(
+      SignInWithFacebookAuthEvent(
+        context: context,
+      ),
+    );
+  }
+
   void goToSignUp() {
     Navigator.pushNamed(
       context,

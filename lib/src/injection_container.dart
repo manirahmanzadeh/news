@@ -8,6 +8,8 @@ import 'package:news_app/src/features/authentication/domain/repository/auth_repo
 import 'package:news_app/src/features/authentication/domain/usecases/get_current_user_usecase.dart';
 import 'package:news_app/src/features/authentication/domain/usecases/send_recovery_email_usecase.dart';
 import 'package:news_app/src/features/authentication/domain/usecases/signin_email_password.dart';
+import 'package:news_app/src/features/authentication/domain/usecases/signin_facebook_usecase.dart';
+import 'package:news_app/src/features/authentication/domain/usecases/signing_google_usecase.dart';
 import 'package:news_app/src/features/authentication/domain/usecases/signout.dart';
 import 'package:news_app/src/features/authentication/domain/usecases/signup_email_password.dart';
 import 'package:news_app/src/features/daily_news/data/data_sources/local/app_database.dart';
@@ -56,12 +58,14 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<SignOutUseCase>(SignOutUseCase(sl()));
   sl.registerSingleton<GetCurrentUserUseCase>(GetCurrentUserUseCase(sl()));
   sl.registerSingleton<SendRecoveryEmailUseCase>(SendRecoveryEmailUseCase(sl()));
+  sl.registerSingleton<SignInWithGoogleUseCase>(SignInWithGoogleUseCase(sl()));
+  sl.registerSingleton<SignInWithFacebookUseCase>(SignInWithFacebookUseCase(sl()));
 
   ///Blocs
 
   ///Global:
   sl.registerFactory<LocaleBloc>(() => LocaleBloc());
-  sl.registerFactory<AuthBloc>(() => AuthBloc(sl(), sl(), sl(), sl(), sl()));
+  sl.registerFactory<AuthBloc>(() => AuthBloc(sl(), sl(), sl(), sl(), sl(), sl(), sl()));
 
   ///Features:
   sl.registerFactory<HomeBloc>(() => HomeBloc(sl()));

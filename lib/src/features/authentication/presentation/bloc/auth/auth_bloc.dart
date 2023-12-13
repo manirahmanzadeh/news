@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/src/features/authentication/domain/usecases/get_current_user_usecase.dart';
 import 'package:news_app/src/features/authentication/domain/usecases/send_recovery_email_usecase.dart';
+import 'package:news_app/src/features/authentication/domain/usecases/signin_facebook_usecase.dart';
+import 'package:news_app/src/features/authentication/domain/usecases/signing_google_usecase.dart';
 import 'package:news_app/src/features/authentication/presentation/register/screens/login_screen.dart';
 import 'package:news_app/src/features/daily_news/presentation/home/screens/home_screen.dart';
 
@@ -18,6 +20,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final SignOutUseCase _signOutUseCase;
   final GetCurrentUserUseCase _getCurrentUserUseCase;
   final SendRecoveryEmailUseCase _sendRecoveryEmailUseCase;
+  final SignInWithGoogleUseCase _signInWithGoogleUseCase;
+  final SignInWithFacebookUseCase _signInWithFacebookUseCase;
 
   AuthBloc(
     this._signInWithEmailAndPasswordUseCase,
@@ -25,11 +29,15 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     this._signOutUseCase,
     this._getCurrentUserUseCase,
     this._sendRecoveryEmailUseCase,
+    this._signInWithGoogleUseCase,
+    this._signInWithFacebookUseCase,
   ) : super(const LoadedAuthState()) {
     on<SignInEmailPasswordAuthEvent>(_onSignInEmailPassword);
     on<SignUpEmailPasswordAuthEvent>(_onSignUpEmailPassword);
     on<SignOutAuthEvent>(_onSignOut);
     on<SendRecoveryEmailAuthEvent>(_onSendRecoveryEmail);
+    on<SignInWithGoogleAuthEvent>(_onSignInWithGoogle);
+    on<SignInWithFacebookAuthEvent>(_onSignInWithFacebook);
   }
 
   _onSignInEmailPassword(SignInEmailPasswordAuthEvent event, Emitter<AuthState> emit) async {
@@ -44,6 +52,30 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         event.context,
         HomeScreen.routeName,
       );
+    } catch (e) {
+      emit(const LoadedAuthState());
+      ScaffoldMessenger.of(event.context).showSnackBar(SnackBar(content: Text(e.toString())));
+    }
+  }
+
+  _onSignInWithGoogle(SignInWithGoogleAuthEvent event, Emitter<AuthState> emit) async {
+    emit(const LoadingAuthState());
+    try {
+      await _signInWithGoogleUseCase();
+      emit(const LoadedAuthState());
+      ScaffoldMessenger.of(event.context).showSnackBar(SnackBar(content: Text('Redirecting!')));
+    } catch (e) {
+      emit(const LoadedAuthState());
+      ScaffoldMessenger.of(event.context).showSnackBar(SnackBar(content: Text(e.toString())));
+    }
+  }
+
+  _onSignInWithFacebook(SignInWithFacebookAuthEvent event, Emitter<AuthState> emit) async {
+    emit(const LoadingAuthState());
+    try {
+      await _signInWithFacebookUseCase();
+      emit(const LoadedAuthState());
+      ScaffoldMessenger.of(event.context).showSnackBar(SnackBar(content: Text('Redirecting!')));
     } catch (e) {
       emit(const LoadedAuthState());
       ScaffoldMessenger.of(event.context).showSnackBar(SnackBar(content: Text(e.toString())));

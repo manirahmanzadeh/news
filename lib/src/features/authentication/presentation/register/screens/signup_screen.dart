@@ -131,16 +131,18 @@ class _SignUpScreen extends StatelessWidget {
                   const SizedBox(
                     height: 16,
                   ),
-                  const LogInButtonComponent(
+                  LogInButtonComponent(
                     icon: 'assets/icons/google.svg',
                     title: 'Continue with Google',
+                    onTap: registerBloc.signInWithGoogle,
                   ),
                   const SizedBox(
                     height: 8,
                   ),
-                  const LogInButtonComponent(
+                  LogInButtonComponent(
                     icon: 'assets/icons/facebook.svg',
                     title: 'Continue with facebook',
+                    onTap: registerBloc.signInWithFacebook,
                   ),
                   const SizedBox(
                     height: 16,
