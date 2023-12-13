@@ -36,4 +36,10 @@ class FirebaseAuthService {
   Future<void> signOut() async {
     await _firebaseAuth.signOut().onError((error, stackTrace) => throw (Exception(error)));
   }
+
+  Future<void> sendRecoveryEmail({
+    required String email,
+  }) async {
+    await _firebaseAuth.sendPasswordResetEmail(email: email);
+  }
 }

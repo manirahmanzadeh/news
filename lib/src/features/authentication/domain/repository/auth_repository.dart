@@ -10,4 +10,6 @@ abstract class AuthRepository {
   bool isLoggedIn();
 
   User? getCurrentUser();
+
+  Future<void> sendRecoveryEmail(String email);
 }

@@ -146,6 +146,7 @@ class _LoginScreen extends StatelessWidget {
                     height: 16,
                   ),
                   InkWell(
+                    onTap: registerBloc.goToForgetPassword,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [

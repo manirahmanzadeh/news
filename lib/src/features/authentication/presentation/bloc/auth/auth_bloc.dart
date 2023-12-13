@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/src/features/authentication/domain/usecases/get_current_user_usecase.dart';
+import 'package:news_app/src/features/authentication/domain/usecases/send_recovery_email_usecase.dart';
 import 'package:news_app/src/features/authentication/presentation/register/screens/login_screen.dart';
 import 'package:news_app/src/features/daily_news/presentation/home/screens/home_screen.dart';
 
@@ -16,16 +17,19 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final SignUpWithEmailAndPasswordUseCase _signUpWithEmailAndPasswordUseCase;
   final SignOutUseCase _signOutUseCase;
   final GetCurrentUserUseCase _getCurrentUserUseCase;
+  final SendRecoveryEmailUseCase _sendRecoveryEmailUseCase;
 
   AuthBloc(
     this._signInWithEmailAndPasswordUseCase,
     this._signUpWithEmailAndPasswordUseCase,
     this._signOutUseCase,
     this._getCurrentUserUseCase,
+    this._sendRecoveryEmailUseCase,
   ) : super(const LoadedAuthState()) {
     on<SignInEmailPasswordAuthEvent>(_onSignInEmailPassword);
     on<SignUpEmailPasswordAuthEvent>(_onSignUpEmailPassword);
     on<SignOutAuthEvent>(_onSignOut);
+    on<SendRecoveryEmailAuthEvent>(_onSendRecoveryEmail);
   }
 
   _onSignInEmailPassword(SignInEmailPasswordAuthEvent event, Emitter<AuthState> emit) async {
@@ -41,8 +45,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         HomeScreen.routeName,
       );
     } catch (e) {
-      ScaffoldMessenger.of(event.context).showSnackBar(SnackBar(content: Text(e.toString())));
       emit(const LoadedAuthState());
+      ScaffoldMessenger.of(event.context).showSnackBar(SnackBar(content: Text(e.toString())));
     }
   }
 
@@ -59,8 +63,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         HomeScreen.routeName,
       );
     } catch (e) {
-      ScaffoldMessenger.of(event.context).showSnackBar(SnackBar(content: Text(e.toString())));
       emit(const LoadedAuthState());
+      ScaffoldMessenger.of(event.context).showSnackBar(SnackBar(content: Text(e.toString())));
     }
   }
 
@@ -74,8 +78,22 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         LoginScreen.routeName,
       );
     } catch (e) {
-      ScaffoldMessenger.of(event.context).showSnackBar(SnackBar(content: Text(e.toString())));
       emit(const LoadedAuthState());
+      ScaffoldMessenger.of(event.context).showSnackBar(SnackBar(content: Text(e.toString())));
+    }
+  }
+
+  _onSendRecoveryEmail(SendRecoveryEmailAuthEvent event, Emitter<AuthState> emit) async {
+    emit(const LoadingAuthState());
+    try {
+      await _sendRecoveryEmailUseCase(
+        params: event.email,
+      );
+      emit(const LoadedAuthState());
+      ScaffoldMessenger.of(event.context).showSnackBar(const SnackBar(content: Text('Recovery email sent!')));
+    } catch (e) {
+      emit(const LoadedAuthState());
+      ScaffoldMessenger.of(event.context).showSnackBar(SnackBar(content: Text(e.toString())));
     }
   }
 

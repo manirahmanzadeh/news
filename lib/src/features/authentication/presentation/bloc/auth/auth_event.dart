@@ -35,3 +35,13 @@ class SignOutAuthEvent extends AuthEvent {
     required this.context,
   });
 }
+
+class SendRecoveryEmailAuthEvent extends AuthEvent {
+  final String email;
+  final BuildContext context;
+
+  const SendRecoveryEmailAuthEvent({
+    required this.email,
+    required this.context,
+  });
+}

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:news_app/src/features/authentication/presentation/register/screens/forget_password_screen.dart';
 import 'package:news_app/src/features/authentication/presentation/register/screens/login_screen.dart';
 import 'package:news_app/src/features/authentication/presentation/register/screens/signup_screen.dart';
 
@@ -74,6 +75,18 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
     }
   }
 
+  submitForgetPasswordForm() {
+    if (registerFormKey.currentState!.validate()) {
+      registerFormKey.currentState!.save();
+      BlocProvider.of<AuthBloc>(context).add(
+        SendRecoveryEmailAuthEvent(
+          email: email!,
+          context: context,
+        ),
+      );
+    }
+  }
+
   void goToSignUp() {
     Navigator.pushNamed(
       context,
@@ -85,6 +98,13 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
     Navigator.pushNamed(
       context,
       LoginScreen.routeName,
+    );
+  }
+
+  void goToForgetPassword() {
+    Navigator.pushNamed(
+      context,
+      ForgetPasswordScreen.routeName,
     );
   }
 }

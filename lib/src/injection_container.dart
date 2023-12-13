@@ -6,6 +6,7 @@ import 'package:news_app/src/features/authentication/data/data_sources/firebase_
 import 'package:news_app/src/features/authentication/data/repository/auth_repository_impl.dart';
 import 'package:news_app/src/features/authentication/domain/repository/auth_repository.dart';
 import 'package:news_app/src/features/authentication/domain/usecases/get_current_user_usecase.dart';
+import 'package:news_app/src/features/authentication/domain/usecases/send_recovery_email_usecase.dart';
 import 'package:news_app/src/features/authentication/domain/usecases/signin_email_password.dart';
 import 'package:news_app/src/features/authentication/domain/usecases/signout.dart';
 import 'package:news_app/src/features/authentication/domain/usecases/signup_email_password.dart';
@@ -54,12 +55,13 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<SignUpWithEmailAndPasswordUseCase>(SignUpWithEmailAndPasswordUseCase(sl()));
   sl.registerSingleton<SignOutUseCase>(SignOutUseCase(sl()));
   sl.registerSingleton<GetCurrentUserUseCase>(GetCurrentUserUseCase(sl()));
+  sl.registerSingleton<SendRecoveryEmailUseCase>(SendRecoveryEmailUseCase(sl()));
 
   ///Blocs
 
   ///Global:
   sl.registerFactory<LocaleBloc>(() => LocaleBloc());
-  sl.registerFactory<AuthBloc>(() => AuthBloc(sl(), sl(), sl(), sl()));
+  sl.registerFactory<AuthBloc>(() => AuthBloc(sl(), sl(), sl(), sl(), sl()));
 
   ///Features:
   sl.registerFactory<HomeBloc>(() => HomeBloc(sl()));

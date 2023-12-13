@@ -31,4 +31,9 @@ class AuthRepositoryImpl implements AuthRepository {
   User? getCurrentUser() {
     return _authService.currentUser;
   }
+
+  @override
+  Future<void> sendRecoveryEmail(String email) {
+    return _authService.sendRecoveryEmail(email: email);
+  }
 }
