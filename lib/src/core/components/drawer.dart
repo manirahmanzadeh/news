@@ -28,7 +28,7 @@ class AppDrawer extends StatelessWidget {
                     ),
                   ),
                   ListTile(
-                    title: Text(user!.email!),
+                    title: Text(user!.displayName ?? 'You haven\'t set your name'),
                   ),
                   ListTile(
                     title: const Text('Log Out'),

@@ -27,6 +27,8 @@ dependencies:
   firebase_core: ^2.24.2
   firebase_auth: ^4.15.3
   flutter_svg: ^2.0.9
+  google_sign_in: ^6.2.1
+  flutter_facebook_auth: ^6.0.3
 
 dev_dependencies:
   flutter_test:

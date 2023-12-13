@@ -43,18 +43,10 @@ class FirebaseAuthService {
     await _firebaseAuth.sendPasswordResetEmail(email: email);
   }
 
-  Future<void> signInWithGoogle() async {
+  Future<void> signInWithCredentials(AuthCredential credential) async {
     await _firebaseAuth
-        .signInWithRedirect(
-          GoogleAuthProvider(),
-        )
-        .onError((error, stackTrace) => throw (Exception(error)));
-  }
-
-  Future<void> signInWithFacebook() async {
-    await _firebaseAuth
-        .signInWithRedirect(
-          FacebookAuthProvider(),
+        .signInWithCredential(
+          credential,
         )
         .onError((error, stackTrace) => throw (Exception(error)));
   }
