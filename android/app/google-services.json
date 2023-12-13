@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "629772530088",
+    "project_id": "com-manirahmanzadeh-news",
+    "storage_bucket": "com-manirahmanzadeh-news.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:629772530088:android:e0814bccb6b2a6d7572d9d",
+        "android_client_info": {
+          "package_name": "com.manirahmanzadeh.news"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD3fp-2EgwqgJxL7iKzIwy1TC7HoD52DMs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

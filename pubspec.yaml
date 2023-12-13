@@ -24,6 +24,7 @@ dependencies:
   cached_network_image: ^3.3.0
   ionicons: ^0.2.2
   url_launcher: ^6.2.2
+  firebase_core: ^2.24.2
 
 dev_dependencies:
   flutter_test:
