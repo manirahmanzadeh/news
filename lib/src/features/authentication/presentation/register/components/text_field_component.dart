@@ -1,14 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class TextFieldComponent extends StatelessWidget {
-  const TextFieldComponent({Key? key, required this.title, required this.icon}) : super(key: key);
+class RegisterTextFormField extends StatelessWidget {
+  const RegisterTextFormField({
+    Key? key,
+    required this.title,
+    required this.icon,
+    required this.onSaved,
+    required this.validator,
+  }) : super(key: key);
   final String title;
   final String icon;
+  final Function(String?) onSaved;
+  final String? Function(String?) validator;
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
+      onSaved: onSaved,
+      validator: validator,
       style: Theme.of(context).textTheme.bodyMedium!.copyWith(
             color: const Color(0xFF9098B1),
           ),
@@ -50,7 +60,10 @@ class TextFieldComponent extends StatelessWidget {
         ),
         prefixIcon: Padding(
           padding: const EdgeInsets.all(16),
-          child: SvgPicture.asset(icon),
+          child: SvgPicture.asset(
+            icon,
+            height: 16,
+          ),
         ),
         hintText: title,
         hintStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
@@ -58,7 +71,7 @@ class TextFieldComponent extends StatelessWidget {
             ),
       ),
       keyboardType: TextInputType.text,
-      cursorColor: Colors.blue,
+      cursorColor: Colors.black,
       textAlign: TextAlign.left,
     );
   }

@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:news_app/firebase_options.dart';
+import 'package:news_app/src/core/bloc/auth/auth_bloc.dart';
 import 'package:news_app/src/core/localization/locale_bloc.dart';
 import 'package:news_app/src/core/localization/locale_eevent.dart';
 import 'package:news_app/src/core/localization/locale_state.dart';
 import 'package:news_app/src/features/authentication/domain/repository/auth_repository.dart';
-import 'package:news_app/src/features/authentication/presentation/bloc/auth_bloc.dart';
 import 'package:news_app/src/features/authentication/presentation/register/screens/login_screen.dart';
 import 'package:news_app/src/features/daily_news/presentation/home/screens/home_screen.dart';
 import 'package:news_app/src/injection_container.dart';
@@ -20,7 +20,6 @@ Future<void> main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await initializeDependencies();
   final isLoggedIn = await sl<AuthRepository>().isLoggedIn();
-  print(isLoggedIn);
   runApp(
     App(
       initialRoute: isLoggedIn ? HomeScreen.routeName : LoginScreen.routeName,

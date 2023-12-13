@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:news_app/src/features/authentication/presentation/bloc/auth_event.dart';
-import 'package:news_app/src/features/authentication/presentation/bloc/auth_state.dart';
 import 'package:news_app/src/features/authentication/presentation/register/screens/login_screen.dart';
 import 'package:news_app/src/features/daily_news/presentation/home/screens/home_screen.dart';
 
-import '../../domain/usecases/signin_email_password.dart';
-import '../../domain/usecases/signout.dart';
-import '../../domain/usecases/signup_email_password.dart';
+import '../../../features/authentication/domain/usecases/signin_email_password.dart';
+import '../../../features/authentication/domain/usecases/signout.dart';
+import '../../../features/authentication/domain/usecases/signup_email_password.dart';
+import 'auth_event.dart';
+import 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final SignInWithEmailAndPasswordUseCase _signInWithEmailAndPasswordUseCase;
@@ -31,14 +31,15 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         'email': event.email,
         'password': event.password,
       });
+      emit(const LoadedAuthState());
+      Navigator.pushReplacementNamed(
+        event.context,
+        HomeScreen.routeName,
+      );
     } catch (e) {
-      emit(const ErrorAuthState());
+      ScaffoldMessenger.of(event.context).showSnackBar(SnackBar(content: Text(e.toString())));
+      emit(const LoadedAuthState());
     }
-    emit(const LoadedAuthState());
-    Navigator.pushNamed(
-      event.context,
-      HomeScreen.routeName,
-    );
   }
 
   _onSignUpEmailPassword(SignUpEmailPasswordAuthEvent event, Emitter<AuthState> emit) async {
@@ -48,27 +49,29 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         'email': event.email,
         'password': event.password,
       });
+      emit(const LoadedAuthState());
+      Navigator.pushReplacementNamed(
+        event.context,
+        HomeScreen.routeName,
+      );
     } catch (e) {
-      emit(const ErrorAuthState());
+      ScaffoldMessenger.of(event.context).showSnackBar(SnackBar(content: Text(e.toString())));
+      emit(const LoadedAuthState());
     }
-    emit(const LoadedAuthState());
-    Navigator.pushNamed(
-      event.context,
-      HomeScreen.routeName,
-    );
   }
 
   _onSignOut(SignOutAuthEvent event, Emitter<AuthState> emit) async {
     emit(const LoadingAuthState());
     try {
       await _signOutUseCase();
+      emit(const LoadedAuthState());
+      Navigator.pushReplacementNamed(
+        event.context,
+        LoginScreen.routeName,
+      );
     } catch (e) {
-      emit(const ErrorAuthState());
+      ScaffoldMessenger.of(event.context).showSnackBar(SnackBar(content: Text(e.toString())));
+      emit(const LoadedAuthState());
     }
-    emit(const LoadedAuthState());
-    Navigator.pushNamed(
-      event.context,
-      LoginScreen.routeName,
-    );
   }
 }

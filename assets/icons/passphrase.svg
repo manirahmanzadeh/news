@@ -1,11 +1,5 @@
-<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path fill-rule="evenodd" clip-rule="evenodd"
-        d="M2 9.75C2 9.19772 2.44772 8.75 3 8.75H21C21.5523 8.75 22 9.19772 22 9.75V21C22 21.5523 21.5523 22 21 22H3C2.44772 22 2 21.5523 2 21V9.75ZM4 10.75V20H20V10.75H4Z"
-        fill="#40BFFF" />
-    <path fill-rule="evenodd" clip-rule="evenodd"
-        d="M12 4C9.48134 4 7.375 6.13206 7.375 8.841C7.375 9.39328 6.92728 9.841 6.375 9.841C5.82272 9.841 5.375 9.39328 5.375 8.841C5.375 5.09919 8.30641 2 12 2C15.6936 2 18.625 5.09919 18.625 8.841C18.625 9.39328 18.1773 9.841 17.625 9.841C17.0727 9.841 16.625 9.39328 16.625 8.841C16.625 6.13206 14.5187 4 12 4Z"
-        fill="#40BFFF" />
-    <path fill-rule="evenodd" clip-rule="evenodd"
-        d="M12 13.7256C12.5523 13.7256 13 14.1733 13 14.7256V15.8506C13 16.4029 12.5523 16.8506 12 16.8506C11.4477 16.8506 11 16.4029 11 15.8506V14.7256C11 14.1733 11.4477 13.7256 12 13.7256Z"
-        fill="#40BFFF" />
+<svg xmlns="http://www.w3.org/2000/svg" height="16" width="14"
+    viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.-->
+    <path opacity="1" fill="#000000"
+        d="M144 144v48H304V144c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192V144C80 64.5 144.5 0 224 0s144 64.5 144 144v48h16c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V256c0-35.3 28.7-64 64-64H80z" />
 </svg>

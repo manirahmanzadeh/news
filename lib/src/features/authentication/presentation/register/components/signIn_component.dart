@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 
 class SignInButtonComponent extends StatelessWidget {
-  const SignInButtonComponent({Key? key}) : super(key: key);
+  const SignInButtonComponent({
+    Key? key,
+    required this.onTap,
+  }) : super(key: key);
+  final Function() onTap;
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () {},
+      onPressed: onTap,
       style: ElevatedButton.styleFrom(
-        backgroundColor: const Color(0xFF40BFFF),
+        backgroundColor: Colors.black,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(
             Radius.circular(5),

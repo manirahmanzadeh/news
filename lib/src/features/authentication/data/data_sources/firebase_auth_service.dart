@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:firebase_auth/firebase_auth.dart';
 
 class FirebaseAuthService {
@@ -11,23 +13,27 @@ class FirebaseAuthService {
     required String email,
     required String password,
   }) async {
-    await _firebaseAuth.signInWithEmailAndPassword(
-      email: email,
-      password: password,
-    );
+    await _firebaseAuth
+        .signInWithEmailAndPassword(
+          email: email,
+          password: password,
+        )
+        .onError((error, stackTrace) => throw (Exception(error)));
   }
 
   Future<void> createUserWithEmailAndPassword({
     required String email,
     required String password,
   }) async {
-    await _firebaseAuth.createUserWithEmailAndPassword(
-      email: email,
-      password: password,
-    );
+    await _firebaseAuth
+        .createUserWithEmailAndPassword(
+          email: email,
+          password: password,
+        )
+        .onError((error, stackTrace) => throw (Exception(error)));
   }
 
   Future<void> signOut() async {
-    await _firebaseAuth.signOut();
+    await _firebaseAuth.signOut().onError((error, stackTrace) => throw (Exception(error)));
   }
 }

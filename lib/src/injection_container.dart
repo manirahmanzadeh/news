@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:news_app/src/core/bloc/article/local/local_article_bloc.dart';
+import 'package:news_app/src/core/bloc/auth/auth_bloc.dart';
 import 'package:news_app/src/core/localization/locale_bloc.dart';
 import 'package:news_app/src/features/authentication/data/data_sources/firebase_auth_service.dart';
 import 'package:news_app/src/features/authentication/data/repository/auth_repository_impl.dart';
@@ -8,7 +9,6 @@ import 'package:news_app/src/features/authentication/domain/repository/auth_repo
 import 'package:news_app/src/features/authentication/domain/usecases/signin_email_password.dart';
 import 'package:news_app/src/features/authentication/domain/usecases/signout.dart';
 import 'package:news_app/src/features/authentication/domain/usecases/signup_email_password.dart';
-import 'package:news_app/src/features/authentication/presentation/bloc/auth_bloc.dart';
 import 'package:news_app/src/features/daily_news/data/data_sources/local/app_database.dart';
 import 'package:news_app/src/features/daily_news/domain/usecases/get_saved_article.dart';
 import 'package:news_app/src/features/daily_news/domain/usecases/remove_article.dart';
