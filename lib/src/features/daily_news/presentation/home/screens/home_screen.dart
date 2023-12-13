@@ -11,7 +11,7 @@ import '../components/news_of_day.dart';
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
-  static const routeName = '/';
+  static const routeName = '/home';
 
   @override
   Widget build(BuildContext context) {

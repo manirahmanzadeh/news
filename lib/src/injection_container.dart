@@ -2,6 +2,13 @@ import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:news_app/src/core/bloc/article/local/local_article_bloc.dart';
 import 'package:news_app/src/core/localization/locale_bloc.dart';
+import 'package:news_app/src/features/authentication/data/data_sources/firebase_auth_service.dart';
+import 'package:news_app/src/features/authentication/data/repository/auth_repository_impl.dart';
+import 'package:news_app/src/features/authentication/domain/repository/auth_repository.dart';
+import 'package:news_app/src/features/authentication/domain/usecases/signin_email_password.dart';
+import 'package:news_app/src/features/authentication/domain/usecases/signout.dart';
+import 'package:news_app/src/features/authentication/domain/usecases/signup_email_password.dart';
+import 'package:news_app/src/features/authentication/presentation/bloc/auth_bloc.dart';
 import 'package:news_app/src/features/daily_news/data/data_sources/local/app_database.dart';
 import 'package:news_app/src/features/daily_news/domain/usecases/get_saved_article.dart';
 import 'package:news_app/src/features/daily_news/domain/usecases/remove_article.dart';
@@ -24,25 +31,36 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<Dio>(Dio());
 
   /// Dependencies
-  sl.registerSingleton<NewsApiService>(NewsApiService(sl()));
 
+  /// News:
+  sl.registerSingleton<NewsApiService>(NewsApiService(sl()));
   sl.registerSingleton<ArticleRepository>(ArticleRepositoryImpl(sl(), sl()));
 
+  /// Auth:
+  sl.registerSingleton<FirebaseAuthService>(FirebaseAuthService());
+  sl.registerSingleton<AuthRepository>(AuthRepositoryImpl(sl()));
+
   ///UseCases
+
+  ///Articles:
   sl.registerSingleton<GetArticleUseCase>(GetArticleUseCase(sl()));
-
   sl.registerSingleton<GetSavedArticleUseCase>(GetSavedArticleUseCase(sl()));
-
   sl.registerSingleton<SaveArticleUseCase>(SaveArticleUseCase(sl()));
-
   sl.registerSingleton<RemoveArticleUseCase>(RemoveArticleUseCase(sl()));
 
+  ///Auth:
+  sl.registerSingleton<SignInWithEmailAndPasswordUseCase>(SignInWithEmailAndPasswordUseCase(sl()));
+  sl.registerSingleton<SignUpWithEmailAndPasswordUseCase>(SignUpWithEmailAndPasswordUseCase(sl()));
+  sl.registerSingleton<SignOutUseCase>(SignOutUseCase(sl()));
+
   ///Blocs
-  sl.registerFactory<HomeBloc>(() => HomeBloc(sl()));
 
-  sl.registerFactory<DiscoverBloc>(() => DiscoverBloc(sl()));
-
-  sl.registerFactory<LocalArticlesBloc>(() => LocalArticlesBloc(sl(), sl(), sl()));
-
+  ///Global:
   sl.registerFactory<LocaleBloc>(() => LocaleBloc());
+  sl.registerFactory<AuthBloc>(() => AuthBloc(sl(), sl(), sl()));
+
+  ///Features:
+  sl.registerFactory<HomeBloc>(() => HomeBloc(sl()));
+  sl.registerFactory<DiscoverBloc>(() => DiscoverBloc(sl()));
+  sl.registerFactory<LocalArticlesBloc>(() => LocalArticlesBloc(sl(), sl(), sl()));
 }
