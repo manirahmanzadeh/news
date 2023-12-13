@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:news_app/src/features/authentication/domain/usecases/get_current_user_usecase.dart';
 import 'package:news_app/src/features/authentication/presentation/register/screens/login_screen.dart';
 import 'package:news_app/src/features/daily_news/presentation/home/screens/home_screen.dart';
 
@@ -13,11 +15,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final SignInWithEmailAndPasswordUseCase _signInWithEmailAndPasswordUseCase;
   final SignUpWithEmailAndPasswordUseCase _signUpWithEmailAndPasswordUseCase;
   final SignOutUseCase _signOutUseCase;
+  final GetCurrentUserUseCase _getCurrentUserUseCase;
 
   AuthBloc(
     this._signInWithEmailAndPasswordUseCase,
     this._signUpWithEmailAndPasswordUseCase,
     this._signOutUseCase,
+    this._getCurrentUserUseCase,
   ) : super(const LoadedAuthState()) {
     on<SignInEmailPasswordAuthEvent>(_onSignInEmailPassword);
     on<SignUpEmailPasswordAuthEvent>(_onSignUpEmailPassword);
@@ -73,5 +77,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       ScaffoldMessenger.of(event.context).showSnackBar(SnackBar(content: Text(e.toString())));
       emit(const LoadedAuthState());
     }
+  }
+
+  User? getCurrentUser() {
+    return _getCurrentUserUseCase();
   }
 }

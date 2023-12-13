@@ -19,7 +19,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await initializeDependencies();
-  final isLoggedIn = await sl<AuthRepository>().isLoggedIn();
+  final isLoggedIn = sl<AuthRepository>().isLoggedIn();
   runApp(
     App(
       initialRoute: isLoggedIn ? HomeScreen.routeName : LoginScreen.routeName,

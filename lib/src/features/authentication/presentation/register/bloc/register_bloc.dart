@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/src/core/bloc/auth/auth_bloc.dart';
 import 'package:news_app/src/core/bloc/auth/auth_event.dart';
+import 'package:news_app/src/features/authentication/presentation/register/screens/login_screen.dart';
+import 'package:news_app/src/features/authentication/presentation/register/screens/signup_screen.dart';
 
 import 'register_event.dart';
 import 'register_state.dart';
@@ -10,7 +12,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   RegisterBloc(this.context) : super(const LoadedRegisterState());
   BuildContext context;
 
-  final loginFormKey = GlobalKey<FormState>();
+  final registerFormKey = GlobalKey<FormState>();
 
   String? email;
   String? password;
@@ -47,8 +49,8 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   }
 
   submitLoginForm() {
-    if (loginFormKey.currentState!.validate()) {
-      loginFormKey.currentState!.save();
+    if (registerFormKey.currentState!.validate()) {
+      registerFormKey.currentState!.save();
       BlocProvider.of<AuthBloc>(context).add(
         SignInEmailPasswordAuthEvent(
           email: email!,
@@ -57,5 +59,32 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
         ),
       );
     }
+  }
+
+  submitSignUpForm() {
+    if (registerFormKey.currentState!.validate()) {
+      registerFormKey.currentState!.save();
+      BlocProvider.of<AuthBloc>(context).add(
+        SignUpEmailPasswordAuthEvent(
+          email: email!,
+          password: password!,
+          context: context,
+        ),
+      );
+    }
+  }
+
+  void goToSignUp() {
+    Navigator.pushNamed(
+      context,
+      SignUpScreen.routeName,
+    );
+  }
+
+  void goToSignIn() {
+    Navigator.pushNamed(
+      context,
+      LoginScreen.routeName,
+    );
   }
 }

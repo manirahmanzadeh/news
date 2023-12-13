@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/src/core/components/bottom_nav_bar.dart';
+import 'package:news_app/src/core/components/drawer.dart';
 import 'package:news_app/src/injection_container.dart';
 
 import '../bloc/home_bloc.dart';
@@ -31,16 +32,19 @@ class _HomeScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        leading: IconButton(
-          onPressed: () {},
-          icon: const Icon(
-            Icons.menu,
-            color: Colors.white,
+        leading: Builder(
+          builder: (context) => IconButton(
+            onPressed: () => Scaffold.of(context).openDrawer(),
+            icon: const Icon(
+              Icons.menu,
+              color: Colors.white,
+            ),
           ),
         ),
       ),
       bottomNavigationBar: const BottomNavBar(index: 0),
       extendBodyBehindAppBar: true,
+      drawer: const AppDrawer(),
       body: ListView(
         padding: EdgeInsets.zero,
         children: const [

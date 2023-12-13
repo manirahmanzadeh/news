@@ -9,22 +9,22 @@ import '../components/logIn_component.dart';
 import '../components/signIn_component.dart';
 import '../components/text_field_component.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+class SignUpScreen extends StatelessWidget {
+  const SignUpScreen({super.key});
 
-  static const routeName = '/login';
+  static const routeName = '/signup';
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider<RegisterBloc>(
       create: (context) => RegisterBloc(context),
-      child: const _LoginScreen(),
+      child: const _SignUpScreen(),
     );
   }
 }
 
-class _LoginScreen extends StatelessWidget {
-  const _LoginScreen({Key? key}) : super(key: key);
+class _SignUpScreen extends StatelessWidget {
+  const _SignUpScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +55,7 @@ class _LoginScreen extends StatelessWidget {
                     height: 16,
                   ),
                   const Text(
-                    'Welcome to News App',
+                    'Let\'s Get Started',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontWeight: FontWeight.w700,
@@ -68,7 +68,7 @@ class _LoginScreen extends StatelessWidget {
                     height: 8,
                   ),
                   Text(
-                    'Sign in to continue',
+                    'Create a new account',
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                           color: const Color(0xFF9098B1),
@@ -97,8 +97,8 @@ class _LoginScreen extends StatelessWidget {
                     height: 16,
                   ),
                   SignInButtonComponent(
-                    onTap: registerBloc.submitLoginForm,
-                    labelText: 'Sign In',
+                    onTap: registerBloc.submitSignUpForm,
+                    labelText: 'Sign Up',
                   ),
                   const SizedBox(
                     height: 21,
@@ -166,16 +166,16 @@ class _LoginScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'Don’t have a account?',
+                        'Already have a account?',
                         style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                               color: const Color(0xFF9098B1),
                               letterSpacing: 0.5,
                             ),
                       ),
                       InkWell(
-                        onTap: registerBloc.goToSignUp,
+                        onTap: registerBloc.goToSignIn,
                         child: Text(
-                          ' Register',
+                          ' Sign In',
                           style: Theme.of(context).textTheme.labelLarge!.copyWith(
                                 color: Colors.black,
                                 letterSpacing: 0.5,

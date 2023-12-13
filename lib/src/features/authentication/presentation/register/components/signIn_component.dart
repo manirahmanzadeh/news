@@ -4,8 +4,10 @@ class SignInButtonComponent extends StatelessWidget {
   const SignInButtonComponent({
     Key? key,
     required this.onTap,
+    required this.labelText,
   }) : super(key: key);
   final Function() onTap;
+  final String labelText;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +23,7 @@ class SignInButtonComponent extends StatelessWidget {
         fixedSize: const Size(343, 57),
       ),
       child: Text(
-        'Sign In',
+        labelText,
         style: Theme.of(context).textTheme.titleSmall!.copyWith(
               color: const Color(0xFFFFFFFF),
               letterSpacing: 0.5,
