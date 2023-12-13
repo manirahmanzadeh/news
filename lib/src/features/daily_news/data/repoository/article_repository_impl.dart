@@ -6,7 +6,7 @@ import 'package:news_app/src/features/daily_news/data/data_sources/remote/news_a
 import 'package:news_app/src/features/daily_news/domain/entities/article.dart';
 
 import '../../../../core/resources/data_state.dart';
-import '../../domain/enums/news_category.dart';
+import '../../domain/enums/news_category_enum.dart';
 import '../../domain/repository/article_repository.dart';
 import '../data_sources/local/app_database.dart';
 import '../models/article.dart';
@@ -18,12 +18,13 @@ class ArticleRepositoryImpl implements ArticleRepository {
   ArticleRepositoryImpl(this._newsApiService, this._appDatabase);
 
   @override
-  Future<DataState<List<ArticleModel>>> getNewsArticles(String? category) async {
+  Future<DataState<List<ArticleModel>>> getNewsArticles(String? category, String? q) async {
     try {
       final httpResponse = await _newsApiService.getNewsArticles(
         apiKey: newsAPIKey,
-        category: category ?? NewsCategory.general.category,
+        category: category ?? NewsCategoryEnum.general.category,
         country: countryQuery,
+        q: q,
       );
       if (httpResponse.response.statusCode == HttpStatus.ok) {
         final articlesList = httpResponse.data
