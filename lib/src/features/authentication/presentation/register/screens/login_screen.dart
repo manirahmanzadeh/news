@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:news_app/src/core/bloc/auth/auth_bloc.dart';
-import 'package:news_app/src/core/bloc/auth/auth_state.dart';
 
+import '../../bloc/auth/auth_bloc.dart';
+import '../../bloc/auth/auth_state.dart';
 import '../bloc/register_bloc.dart';
 import '../components/logIn_component.dart';
 import '../components/signIn_component.dart';

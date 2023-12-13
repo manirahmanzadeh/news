@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:news_app/src/core/bloc/article/local/local_article_bloc.dart';
-import 'package:news_app/src/core/bloc/auth/auth_bloc.dart';
 import 'package:news_app/src/core/localization/locale_bloc.dart';
 import 'package:news_app/src/features/authentication/data/data_sources/firebase_auth_service.dart';
 import 'package:news_app/src/features/authentication/data/repository/auth_repository_impl.dart';
@@ -17,6 +16,7 @@ import 'package:news_app/src/features/daily_news/domain/usecases/save_article.da
 import 'package:news_app/src/features/daily_news/presentation/discover/bloc/discover_bloc.dart';
 import 'package:news_app/src/features/daily_news/presentation/home/bloc/home_bloc.dart';
 
+import 'features/authentication/presentation/bloc/auth/auth_bloc.dart';
 import 'features/daily_news/data/data_sources/remote/news_api_service.dart';
 import 'features/daily_news/data/repoository/article_repository_impl.dart';
 import 'features/daily_news/domain/repository/article_repository.dart';

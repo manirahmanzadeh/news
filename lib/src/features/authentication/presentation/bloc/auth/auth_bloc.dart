@@ -5,9 +5,9 @@ import 'package:news_app/src/features/authentication/domain/usecases/get_current
 import 'package:news_app/src/features/authentication/presentation/register/screens/login_screen.dart';
 import 'package:news_app/src/features/daily_news/presentation/home/screens/home_screen.dart';
 
-import '../../../features/authentication/domain/usecases/signin_email_password.dart';
-import '../../../features/authentication/domain/usecases/signout.dart';
-import '../../../features/authentication/domain/usecases/signup_email_password.dart';
+import '../../../domain/usecases/signin_email_password.dart';
+import '../../../domain/usecases/signout.dart';
+import '../../../domain/usecases/signup_email_password.dart';
 import 'auth_event.dart';
 import 'auth_state.dart';
 

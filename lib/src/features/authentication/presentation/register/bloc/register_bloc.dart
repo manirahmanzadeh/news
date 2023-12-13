@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:news_app/src/core/bloc/auth/auth_bloc.dart';
-import 'package:news_app/src/core/bloc/auth/auth_event.dart';
 import 'package:news_app/src/features/authentication/presentation/register/screens/login_screen.dart';
 import 'package:news_app/src/features/authentication/presentation/register/screens/signup_screen.dart';
 
+import '../../bloc/auth/auth_bloc.dart';
+import '../../bloc/auth/auth_event.dart';
 import 'register_event.dart';
 import 'register_state.dart';
 
