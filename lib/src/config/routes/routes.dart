@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/src/features/authentication/presentation/account/screens/profile_screen.dart';
 import 'package:news_app/src/features/authentication/presentation/register/screens/forget_password_screen.dart';
 import 'package:news_app/src/features/authentication/presentation/register/screens/login_screen.dart';
 import 'package:news_app/src/features/authentication/presentation/register/screens/signup_screen.dart';
 import 'package:news_app/src/features/daily_news/presentation/article_detail/article_screen.dart';
 import 'package:news_app/src/features/daily_news/presentation/discover/screens/discover_screen.dart';
-import 'package:news_app/src/features/daily_news/presentation/home/screens/account_screen.dart';
 import 'package:news_app/src/features/daily_news/presentation/home/screens/home_screen.dart';
 
 class AppRoutes {
@@ -14,7 +14,7 @@ class AppRoutes {
     ForgetPasswordScreen.routeName: (context) => const ForgetPasswordScreen(),
     HomeScreen.routeName: (context) => const HomeScreen(),
     DiscoverScreen.routeName: (context) => const DiscoverScreen(),
-    AccountScreen.routeName: (context) => const AccountScreen(),
+    ProfileScreen.routeName: (context) => const ProfileScreen(),
     ArticleScreen.routeName: (context) => const ArticleScreen(),
   };
 }

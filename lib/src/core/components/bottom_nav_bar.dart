@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/src/features/authentication/presentation/account/screens/profile_screen.dart';
 import 'package:news_app/src/features/daily_news/presentation/discover/screens/discover_screen.dart';
-import 'package:news_app/src/features/daily_news/presentation/home/screens/account_screen.dart';
 import 'package:news_app/src/features/daily_news/presentation/home/screens/home_screen.dart';
 
 class BottomNavBar extends StatelessWidget {
@@ -46,7 +46,7 @@ class BottomNavBar extends StatelessWidget {
             margin: const EdgeInsets.only(right: 50),
             child: IconButton(
               onPressed: () {
-                Navigator.pushNamed(context, AccountScreen.routeName);
+                Navigator.pushNamed(context, ProfileScreen.routeName);
               },
               icon: const Icon(Icons.person),
             ),

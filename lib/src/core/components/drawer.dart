@@ -13,6 +13,7 @@ class AppDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     final authBloc = BlocProvider.of<AuthBloc>(context);
     final user = authBloc.getCurrentUser();
+    final displayName = user!.displayName == null || user.displayName!.isEmpty ? null : user.displayName;
     return BlocBuilder<AuthBloc, AuthState>(
       builder: (_, state) => Drawer(
         child: state is LoadingAuthState
@@ -28,7 +29,7 @@ class AppDrawer extends StatelessWidget {
                     ),
                   ),
                   ListTile(
-                    title: Text(user!.displayName ?? 'You haven\'t set your name'),
+                    title: Text(displayName ?? 'You haven\'t set your name'),
                   ),
                   ListTile(
                     title: const Text('Log Out'),
