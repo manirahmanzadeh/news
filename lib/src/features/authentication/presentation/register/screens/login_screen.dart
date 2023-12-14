@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:news_app/src/features/authentication/presentation/register/components/secure_text_field_component.dart';
 
 import '../../bloc/auth/auth_bloc.dart';
 import '../../bloc/auth/auth_state.dart';
@@ -87,7 +88,7 @@ class _LoginScreen extends StatelessWidget {
                   const SizedBox(
                     height: 8,
                   ),
-                  RegisterTextFormField(
+                  SecureTextFieldComponent(
                     title: 'Password',
                     icon: 'assets/icons/passphrase.svg',
                     validator: registerBloc.passwordValidator,
