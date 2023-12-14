@@ -66,6 +66,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       ScaffoldMessenger.of(event.context).showSnackBar(SnackBar(content: Text('Redirecting!')));
     } catch (e) {
       emit(const LoadedAuthState());
+      print('error');
+      print(e.toString());
       ScaffoldMessenger.of(event.context).showSnackBar(SnackBar(content: Text(e.toString())));
     }
   }

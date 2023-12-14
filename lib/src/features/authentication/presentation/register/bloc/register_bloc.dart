@@ -28,7 +28,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
 
   String? emailValidator(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Password Is Required!';
+      return 'Email Is Required!';
     }
     final RegExp emailRegex = RegExp(
       r'^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$',

@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:news_app/src/core/constants/constants.dart';
 import 'package:news_app/src/features/authentication/data/data_sources/firebase_auth_service.dart';
 import 'package:news_app/src/features/authentication/domain/repository/auth_repository.dart';
 
@@ -54,8 +55,15 @@ class AuthRepositoryImpl implements AuthRepository {
 
   @override
   Future<void> signIngWithGoogle() async {
+    const List<String> scopes = <String>[
+      'email',
+    ];
+    GoogleSignIn googleSignIn = GoogleSignIn(
+      clientId: androidOAuthClientId,
+      scopes: scopes,
+    );
     // Trigger the authentication flow
-    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+    final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
 
     // Obtain the auth details from the request
     final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
