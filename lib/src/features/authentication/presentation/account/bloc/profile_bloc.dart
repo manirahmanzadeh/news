@@ -42,8 +42,8 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   }
 
   String? getUserDisplayName(BuildContext context) {
-    final user = BlocProvider.of<AuthBloc>(context).getCurrentUser()!;
-    if (user.displayName != null && user.displayName!.isNotEmpty) {
+    final user = BlocProvider.of<AuthBloc>(context).getCurrentUser();
+    if (user != null && user.displayName != null && user.displayName!.isNotEmpty) {
       return user.displayName;
     }
     return null;
@@ -52,22 +52,28 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   bool hasDisplayName(BuildContext context) => getUserDisplayName(context) != null;
 
   String? getUserEmail(BuildContext context) {
-    final user = BlocProvider.of<AuthBloc>(context).getCurrentUser()!;
-    return user.email;
+    final user = BlocProvider.of<AuthBloc>(context).getCurrentUser();
+    if(user != null){
+      return user.email;
+    }
+    return null;
   }
 
   bool hasEmail(BuildContext context) => getUserEmail(context) != null;
 
   String? getUserPhotoUrl(BuildContext context) {
-    final user = BlocProvider.of<AuthBloc>(context).getCurrentUser()!;
-    return user.photoURL;
+    final user = BlocProvider.of<AuthBloc>(context).getCurrentUser();
+    if(user != null){
+      return user.photoURL;
+    }
+    return null;
   }
 
   bool hasPhoto(BuildContext context) => getUserPhotoUrl(context) != null;
 
   bool verifyNeed(BuildContext context) {
-    final user = BlocProvider.of<AuthBloc>(context).getCurrentUser()!;
-    if (user.email != null && !user.emailVerified) {
+    final user = BlocProvider.of<AuthBloc>(context).getCurrentUser();
+    if (user != null && user.email != null && !user.emailVerified) {
       return true;
     }
     return false;
