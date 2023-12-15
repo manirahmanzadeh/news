@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/src/core/components/bottom_nav_bar.dart';
 import 'package:news_app/src/core/components/drawer.dart';
+import 'package:news_app/src/core/components/shimmer/shimmer_screen_widget.dart';
 import 'package:news_app/src/features/daily_news/domain/enums/news_category_enum.dart';
 import 'package:news_app/src/injection_container.dart';
 
 import '../bloc/discover_bloc.dart';
 import '../bloc/discover_event.dart';
+import '../bloc/discover_state.dart';
 import '../components/category_news.dart';
 import '../components/discover_news.dart';
 
@@ -58,12 +60,24 @@ class _DiscoverScreen extends StatelessWidget {
         ),
         drawer: const AppDrawer(),
         bottomNavigationBar: const BottomNavBar(index: 1),
-        body: ListView(
-          padding: const EdgeInsets.all(20.0),
-          children: [
-            const DiscoverNews(),
-            CategoryNews(tabs: tabs),
-          ],
+        body: BlocBuilder<DiscoverBloc, DiscoverState>(
+          builder: (_, state) {
+            return ListView(
+              padding: const EdgeInsets.all(20.0),
+              children: [
+                const DiscoverNews(),
+                AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 350),
+                  child: (state is LoadingDiscoverState)
+                      ? ShimmerScreen(
+                          enabled: true,
+                          child: CategoryNews(tabs: tabs),
+                        )
+                      : CategoryNews(tabs: tabs),
+                )
+              ],
+            );
+          },
         ),
       ),
     );

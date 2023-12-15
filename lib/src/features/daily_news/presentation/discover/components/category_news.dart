@@ -42,9 +42,21 @@ class CategoryNews extends StatelessWidget {
           builder: (_, state) {
             if (state is LoadingDiscoverState) {
               return SizedBox(
-                height: MediaQuery.of(context).size.height / 2,
-                child: const Center(
-                  child: CircularProgressIndicator(),
+                height: MediaQuery.of(context).size.height,
+                child: TabBarView(
+                  children: tabs
+                      .map(
+                        (tab) => ListView.builder(
+                          shrinkWrap: true,
+                          itemCount: 6,
+                          itemBuilder: (context, index) {
+                            return const ArticleTileSmall(
+                              loading: true,
+                            );
+                          },
+                        ),
+                      )
+                      .toList(),
                 ),
               );
             } else {
@@ -59,6 +71,7 @@ class CategoryNews extends StatelessWidget {
                           itemBuilder: (context, index) {
                             return ArticleTileSmall(
                               article: state.articles![index],
+                              loading: false,
                             );
                           },
                         ),

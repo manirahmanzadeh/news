@@ -15,8 +15,35 @@ class BreakingNews extends StatelessWidget {
     return BlocBuilder<HomeBloc, HomeState>(
       builder: (_, state) {
         if (state is LoadingHomeState) {
-          return const Center(
-            child: CircularProgressIndicator(),
+          return Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Breaking News',
+                      style: Theme.of(context).textTheme.headlineSmall!.copyWith(fontWeight: FontWeight.bold),
+                    ),
+                    Text('More', style: Theme.of(context).textTheme.bodyLarge),
+                  ],
+                ),
+                const SizedBox(height: 20),
+                SizedBox(
+                  height: 250,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: 3,
+                    itemBuilder: (context, index) {
+                      return const ArticleTileWide(
+                        loading: true,
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
           );
         } else {
           return Padding(
@@ -40,7 +67,10 @@ class BreakingNews extends StatelessWidget {
                     scrollDirection: Axis.horizontal,
                     itemCount: state.articles!.length,
                     itemBuilder: (context, index) {
-                      return ArticleTileWide(article: state.articles![index]);
+                      return ArticleTileWide(
+                        article: state.articles![index],
+                        loading: false,
+                      );
                     },
                   ),
                 ),
