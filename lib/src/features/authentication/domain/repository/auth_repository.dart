@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart';
 
 abstract class AuthRepository {
@@ -24,4 +26,6 @@ abstract class AuthRepository {
   Future<void> changeEmail(String email);
 
   Future<void> sendVerifyEmail();
+
+  Future<void> saveProfilePhoto(File photo);
 }

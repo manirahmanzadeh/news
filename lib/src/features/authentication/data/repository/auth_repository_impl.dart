@@ -1,14 +1,18 @@
+import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:news_app/src/core/constants/constants.dart';
 import 'package:news_app/src/features/authentication/data/data_sources/firebase_auth_service.dart';
+import 'package:news_app/src/features/authentication/data/data_sources/firebase_storage_service.dart';
 import 'package:news_app/src/features/authentication/domain/repository/auth_repository.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
   final FirebaseAuthService _authService;
+  final FirebaseStorageService _storageService;
 
-  const AuthRepositoryImpl(this._authService);
+  const AuthRepositoryImpl(this._authService, this._storageService);
 
   @override
   Future<void> createUserWithEmailAndPassword(String email, String password) async {
@@ -95,5 +99,11 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<void> sendVerifyEmail() {
     return _authService.sendVerificationEmail();
+  }
+
+  @override
+  Future<void> saveProfilePhoto(File photo) async {
+    final downloadUrl = await _storageService.uploadProfilePhoto(photo, _authService.currentUser!);
+    await _authService.changeProfilePhoto(downloadUrl);
   }
 }

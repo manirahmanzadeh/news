@@ -3,6 +3,7 @@ import 'package:get_it/get_it.dart';
 import 'package:news_app/src/core/bloc/article/local/local_article_bloc.dart';
 import 'package:news_app/src/core/localization/locale_bloc.dart';
 import 'package:news_app/src/features/authentication/data/data_sources/firebase_auth_service.dart';
+import 'package:news_app/src/features/authentication/data/data_sources/firebase_storage_service.dart';
 import 'package:news_app/src/features/authentication/data/repository/auth_repository_impl.dart';
 import 'package:news_app/src/features/authentication/domain/repository/auth_repository.dart';
 import 'package:news_app/src/features/authentication/domain/usecases/edit_user_usecases.dart';
@@ -44,7 +45,8 @@ Future<void> initializeDependencies() async {
 
   /// Auth:
   sl.registerSingleton<FirebaseAuthService>(FirebaseAuthService());
-  sl.registerSingleton<AuthRepository>(AuthRepositoryImpl(sl()));
+  sl.registerSingleton<FirebaseStorageService>(FirebaseStorageService());
+  sl.registerSingleton<AuthRepository>(AuthRepositoryImpl(sl(), sl()));
 
   ///UseCases
 
@@ -66,13 +68,14 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<ChangeEmailUseCase>(ChangeEmailUseCase(sl()));
   sl.registerSingleton<ChangePasswordUseCase>(ChangePasswordUseCase(sl()));
   sl.registerSingleton<SendVerifyEmailUseCase>(SendVerifyEmailUseCase(sl()));
+  sl.registerSingleton<ChangeProfilePhotoUseCase>(ChangeProfilePhotoUseCase(sl()));
 
   ///Blocs
 
   ///Global:
   sl.registerFactory<LocaleBloc>(() => LocaleBloc());
   sl.registerFactory<AuthBloc>(() => AuthBloc(sl(), sl(), sl(), sl(), sl(), sl(), sl()));
-  sl.registerFactory<ProfileBloc>(() => ProfileBloc(sl(), sl(), sl(), sl()));
+  sl.registerFactory<ProfileBloc>(() => ProfileBloc(sl(), sl(), sl(), sl(), sl()));
 
   ///Features:
   sl.registerFactory<HomeBloc>(() => HomeBloc(sl()));

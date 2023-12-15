@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 
 abstract class ProfileEvent {
@@ -29,4 +31,11 @@ class SendVerifyEmailProfileEvent extends ProfileEvent {
   final BuildContext context;
 
   const SendVerifyEmailProfileEvent({required this.context});
+}
+
+class ChangeProfilePhotoProfileEvent extends ProfileEvent {
+  final File photo;
+  final BuildContext context;
+
+  const ChangeProfilePhotoProfileEvent({required this.photo, required this.context});
 }

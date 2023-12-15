@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:news_app/src/features/authentication/domain/usecases/edit_user_usecases.dart';
 import 'package:news_app/src/features/authentication/presentation/account/bloc/profile_event.dart';
 import 'package:news_app/src/features/authentication/presentation/account/bloc/profile_state.dart';
@@ -13,17 +16,20 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   final ChangePasswordUseCase _changePasswordUseCase;
   final ChangeEmailUseCase _changeEmailUseCase;
   final SendVerifyEmailUseCase _sendVerifyEmailUseCase;
+  final ChangeProfilePhotoUseCase _changeProfilePhotoUseCase;
 
   ProfileBloc(
     this._changeDisplayNameUseCase,
     this._changePasswordUseCase,
     this._changeEmailUseCase,
     this._sendVerifyEmailUseCase,
+    this._changeProfilePhotoUseCase,
   ) : super(const LoadedProfileState()) {
     on<ChangeDisplayNameProfileEvent>(_onChangeDisplayNameEvent);
     on<ChangePasswordProfileEvent>(_onChangePasswordEvent);
     on<ChangeEmailProfileEvent>(_onChangeEmailEvent);
     on<SendVerifyEmailProfileEvent>(_onSendVerifyEmailEvent);
+    on<ChangeProfilePhotoProfileEvent>(_onChangeProfilePhotoEvent);
   }
 
   final formKey = GlobalKey<FormState>();
@@ -108,6 +114,48 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     add(SendVerifyEmailProfileEvent(context: context));
   }
 
+  Future<void> _pickImage(
+    ImageSource source,
+    BuildContext context,
+  ) async {
+    final picker = ImagePicker();
+    final pickedFile = await picker.pickImage(source: source);
+
+    if (pickedFile != null) {
+      File image = File(pickedFile.path);
+      add(ChangeProfilePhotoProfileEvent(photo: image, context: context));
+    }
+  }
+
+  void showImagePicker(BuildContext screenContext) {
+    showModalBottomSheet(
+      context: screenContext,
+      builder: (BuildContext context) {
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            ListTile(
+              leading: const Icon(Icons.photo_library),
+              title: const Text('Choose from Gallery'),
+              onTap: () {
+                _pickImage(ImageSource.gallery, screenContext);
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.camera_alt),
+              title: const Text('Take a Photo'),
+              onTap: () {
+                _pickImage(ImageSource.camera, screenContext);
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   _onChangeDisplayNameEvent(ChangeDisplayNameProfileEvent event, Emitter<ProfileState> emit) async {
     if (formKey.currentState?.validate() ?? false) {
       formKey.currentState!.save();
@@ -150,6 +198,18 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         emit(const LoadedProfileState());
         ScaffoldMessenger.of(event.context).showSnackBar(SnackBar(content: Text(e.toString())));
       }
+    }
+  }
+
+  _onChangeProfilePhotoEvent(ChangeProfilePhotoProfileEvent event, Emitter<ProfileState> emit) async {
+    emit(const LoadingProfileState());
+    try {
+      await _changeProfilePhotoUseCase(params: event.photo);
+      emit(const LoadedProfileState());
+      ScaffoldMessenger.of(event.context).showSnackBar(const SnackBar(content: Text('Changes Submitted!')));
+    } catch (e) {
+      emit(const LoadedProfileState());
+      ScaffoldMessenger.of(event.context).showSnackBar(SnackBar(content: Text(e.toString())));
     }
   }
 

@@ -67,34 +67,34 @@ class ProfileScreen extends StatelessWidget {
                   ),
                   onTap: () => staticProfileBloc.goToChangeName(context),
                 ),
-                ListTile(
-                  onTap: () => staticProfileBloc.goToChangeEmail(context),
-                  leading: SvgPicture.asset(
-                    'assets/icons/email.svg',
-                    height: 16,
-                  ),
-                  minVerticalPadding: 16,
-                  title: Row(
-                    children: <Widget>[
-                      Text(
-                        'Email',
-                        style: Theme.of(context).textTheme.labelLarge,
-                      ),
-                      Expanded(child: Container()),
-                      Text(
-                        profileBloc.getUserEmail(context) ?? 'Set an Email',
-                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: const Color(0xFF9098B1)),
-                      ),
-                      const SizedBox(
-                        width: 16,
-                      ),
-                      SvgPicture.asset(
-                        'assets/icons/arrow-right.svg',
-                        height: 16,
-                      )
-                    ],
-                  ),
-                ),
+                // ListTile(
+                //   onTap: () => staticProfileBloc.goToChangeEmail(context),
+                //   leading: SvgPicture.asset(
+                //     'assets/icons/email.svg',
+                //     height: 16,
+                //   ),
+                //   minVerticalPadding: 16,
+                //   title: Row(
+                //     children: <Widget>[
+                //       Text(
+                //         'Email',
+                //         style: Theme.of(context).textTheme.labelLarge,
+                //       ),
+                //       Expanded(child: Container()),
+                //       Text(
+                //         profileBloc.getUserEmail(context) ?? 'Set an Email',
+                //         style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: const Color(0xFF9098B1)),
+                //       ),
+                //       const SizedBox(
+                //         width: 16,
+                //       ),
+                //       SvgPicture.asset(
+                //         'assets/icons/arrow-right.svg',
+                //         height: 16,
+                //       )
+                //     ],
+                //   ),
+                // ),
                 ListTile(
                   onTap: () => staticProfileBloc.goToChangePassword(context),
                   leading: SvgPicture.asset(

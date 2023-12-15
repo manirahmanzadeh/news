@@ -14,7 +14,7 @@ class ChangeNameScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final profileBloc = BlocProvider.of<ProfileBloc>(context, listen: true);
+    final profileBloc = BlocProvider.of<ProfileBloc>(context, listen: true);
     final staticProfileBloc = BlocProvider.of<ProfileBloc>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
@@ -44,6 +44,30 @@ class ChangeNameScreen extends StatelessWidget {
                     Expanded(
                       child: ListView(
                         children: [
+                          const SizedBox(
+                            height: 16,
+                          ),
+                          InkWell(
+                            onTap: () => staticProfileBloc.showImagePicker(context),
+                            child: CircleAvatar(
+                              radius: 50.0,
+                              backgroundColor: Colors.grey[300],
+                              child: profileBloc.getUserPhotoUrl(context) != null
+                                  ? ClipOval(
+                                      child: Image.network(
+                                        profileBloc.getUserPhotoUrl(context)!,
+                                        width: 100.0,
+                                        height: 100.0,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    )
+                                  : const Icon(
+                                      Icons.person,
+                                      size: 50.0,
+                                      color: Colors.grey,
+                                    ),
+                            ),
+                          ),
                           const SizedBox(
                             height: 16,
                           ),

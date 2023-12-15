@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:news_app/src/core/usecases/usecase.dart';
 
 import '../repository/auth_repository.dart';
@@ -43,5 +45,16 @@ class SendVerifyEmailUseCase implements UseCase<void, void> {
   @override
   Future<void> call({void params}) {
     return _authRepository.sendVerifyEmail();
+  }
+}
+
+class ChangeProfilePhotoUseCase implements UseCase<void, File> {
+  final AuthRepository _authRepository;
+
+  ChangeProfilePhotoUseCase(this._authRepository);
+
+  @override
+  Future<void> call({File? params}) {
+    return _authRepository.saveProfilePhoto(params!);
   }
 }

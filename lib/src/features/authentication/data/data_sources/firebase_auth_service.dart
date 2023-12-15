@@ -79,6 +79,14 @@ class FirebaseAuthService {
         .onError((error, stackTrace) => throw (Exception(error)));
   }
 
+  Future<void> changeProfilePhoto(String url) async {
+    await _firebaseAuth.currentUser
+        ?.updatePhotoURL(
+          url,
+        )
+        .onError((error, stackTrace) => throw (Exception(error)));
+  }
+
   Future<void> sendVerificationEmail() async {
     await _firebaseAuth.currentUser
         ?.sendEmailVerification(ActionCodeSettings(url: deeplLink))
