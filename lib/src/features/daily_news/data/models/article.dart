@@ -11,7 +11,7 @@ class ArticleModel extends ArticleEntity {
     String? description,
     String? url,
     String? urlToImage,
-    DateTime? publishedAt,
+    String? publishedAt,
     String? content,
   }) : super(
           id: id,
@@ -31,7 +31,7 @@ class ArticleModel extends ArticleEntity {
       description: map['description'] ?? "",
       url: map['url'] ?? "",
       urlToImage: map['urlToImage'] ?? "",
-      publishedAt: DateTime.tryParse(map['publishedAt']),
+      publishedAt: map['publishedAt'],
       content: map['content'] ?? "",
     );
   }

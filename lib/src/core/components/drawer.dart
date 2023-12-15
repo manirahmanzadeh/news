@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/src/features/authentication/presentation/account/bloc/profile_bloc.dart';
 import 'package:news_app/src/features/authentication/presentation/account/screens/profile_screen.dart';
+import 'package:news_app/src/features/daily_news/presentation/saved_article/saved_article.dart';
 
 import '../../features/authentication/presentation/bloc/auth/auth_bloc.dart';
 import '../../features/authentication/presentation/bloc/auth/auth_event.dart';
@@ -50,6 +51,10 @@ class AppDrawer extends StatelessWidget {
                   ListTile(
                     title: Text(displayName ?? 'You haven\'t set your name'),
                     onTap: () => Navigator.pushNamed(context, ProfileScreen.routeName),
+                  ),
+                  ListTile(
+                    title: const Text('Saved Articles'),
+                    onTap: () => Navigator.pushNamed(context, SavedArticles.routeName),
                   ),
                   ListTile(
                     title: const Text('Log Out'),

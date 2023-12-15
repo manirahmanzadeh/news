@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:news_app/src/core/bloc/article/local/local_article_bloc.dart';
+import 'package:news_app/src/core/bloc/article/local/local_article_event.dart';
 import 'package:news_app/src/core/components/image_container.dart';
 import 'package:news_app/src/features/daily_news/domain/entities/article.dart';
 import 'package:news_app/src/features/daily_news/presentation/article_detail/bloc/article_detail_bloc.dart';
@@ -45,6 +47,13 @@ class _ArticleScreen extends StatelessWidget {
             NewsHeadline(article: article),
             NewsBody(article: article),
           ],
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            BlocProvider.of<LocalArticlesBloc>(context).add(SaveArticle(article));
+            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Article Saved!')));
+          },
+          child: const Icon(Icons.save_alt),
         ),
       ),
     );

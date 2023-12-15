@@ -89,7 +89,8 @@ class ArticleTileWide extends StatelessWidget {
               style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.bold, height: 1.5),
             ),
             const SizedBox(height: 5),
-            Text('${DateTime.now().difference(article!.publishedAt!).inHours} hours ago', style: Theme.of(context).textTheme.bodySmall),
+            Text('${DateTime.now().difference(DateTime.parse(article!.publishedAt!)).inHours} hours ago',
+                style: Theme.of(context).textTheme.bodySmall),
             const SizedBox(height: 5),
             Text(
               'by ${article!.author ?? 'Author'}',

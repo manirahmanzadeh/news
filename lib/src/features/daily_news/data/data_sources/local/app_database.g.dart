@@ -147,7 +147,7 @@ class _$ArticleDao extends ArticleDao {
             description: row['description'] as String?,
             url: row['url'] as String?,
             urlToImage: row['urlToImage'] as String?,
-            publishedAt: row['publishedAt'] as DateTime?,
+            publishedAt: row['publishedAt'] as String?,
             content: row['content'] as String?));
   }
 
