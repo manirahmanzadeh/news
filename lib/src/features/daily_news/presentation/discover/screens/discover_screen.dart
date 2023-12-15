@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/src/core/components/bottom_nav_bar.dart';
+import 'package:news_app/src/core/components/drawer.dart';
 import 'package:news_app/src/features/daily_news/domain/enums/news_category_enum.dart';
 import 'package:news_app/src/injection_container.dart';
 
@@ -45,14 +46,17 @@ class _DiscoverScreen extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0,
-          leading: IconButton(
-            onPressed: () {},
-            icon: const Icon(
-              Icons.menu,
-              color: Colors.black,
+          leading: Builder(
+            builder: (context) => IconButton(
+              onPressed: () => Scaffold.of(context).openDrawer(),
+              icon: const Icon(
+                Icons.menu,
+                color: Colors.black,
+              ),
             ),
           ),
         ),
+        drawer: const AppDrawer(),
         bottomNavigationBar: const BottomNavBar(index: 1),
         body: ListView(
           padding: const EdgeInsets.all(20.0),

@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
 
-class SignInButtonComponent extends StatelessWidget {
-  const SignInButtonComponent({Key? key}) : super(key: key);
+class AppButton extends StatelessWidget {
+  const AppButton({
+    Key? key,
+    required this.onTap,
+    required this.labelText,
+  }) : super(key: key);
+  final Function() onTap;
+  final String labelText;
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () {},
+      onPressed: onTap,
       style: ElevatedButton.styleFrom(
-        backgroundColor: const Color(0xFF40BFFF),
+        backgroundColor: Colors.black,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(
             Radius.circular(5),
@@ -17,7 +23,7 @@ class SignInButtonComponent extends StatelessWidget {
         fixedSize: const Size(343, 57),
       ),
       child: Text(
-        'Sign In',
+        labelText,
         style: Theme.of(context).textTheme.titleSmall!.copyWith(
               color: const Color(0xFFFFFFFF),
               letterSpacing: 0.5,

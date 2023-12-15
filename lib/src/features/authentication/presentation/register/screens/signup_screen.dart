@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:news_app/src/core/components/app_secure_text_form_field.dart';
 import 'package:news_app/src/core/components/app_text_form_field.dart';
 import 'package:news_app/src/core/utils/validators.dart';
 
@@ -11,22 +10,22 @@ import '../../bloc/auth/auth_state.dart';
 import '../bloc/register_bloc.dart';
 import '../components/logIn_component.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+class SignUpScreen extends StatelessWidget {
+  const SignUpScreen({super.key});
 
-  static const routeName = '/login';
+  static const routeName = '/signup';
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider<RegisterBloc>(
       create: (context) => RegisterBloc(context),
-      child: const _LoginScreen(),
+      child: const _SignUpScreen(),
     );
   }
 }
 
-class _LoginScreen extends StatelessWidget {
-  const _LoginScreen({Key? key}) : super(key: key);
+class _SignUpScreen extends StatelessWidget {
+  const _SignUpScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +56,7 @@ class _LoginScreen extends StatelessWidget {
                     height: 16,
                   ),
                   const Text(
-                    'Welcome to News App',
+                    'Let\'s Get Started',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontWeight: FontWeight.w700,
@@ -70,7 +69,7 @@ class _LoginScreen extends StatelessWidget {
                     height: 8,
                   ),
                   Text(
-                    'Sign in to continue',
+                    'Create a new account',
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                           color: const Color(0xFF9098B1),
@@ -89,8 +88,8 @@ class _LoginScreen extends StatelessWidget {
                   const SizedBox(
                     height: 8,
                   ),
-                  AppSecureTextFormField(
-                    title: 'Password',
+                  AppTextFormField(
+                    hint: 'Password',
                     icon: 'assets/icons/passphrase.svg',
                     validator: AppValidator.passwordValidator,
                     onSaved: registerBloc.onSavedPassword,
@@ -99,8 +98,8 @@ class _LoginScreen extends StatelessWidget {
                     height: 16,
                   ),
                   AppButton(
-                    onTap: registerBloc.submitLoginForm,
-                    labelText: 'Sign In',
+                    onTap: registerBloc.submitSignUpForm,
+                    labelText: 'Sign Up',
                   ),
                   const SizedBox(
                     height: 21,
@@ -171,16 +170,16 @@ class _LoginScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'Don’t have a account?',
+                        'Already have a account?',
                         style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                               color: const Color(0xFF9098B1),
                               letterSpacing: 0.5,
                             ),
                       ),
                       InkWell(
-                        onTap: registerBloc.goToSignUp,
+                        onTap: registerBloc.goToSignIn,
                         child: Text(
-                          ' Register',
+                          ' Sign In',
                           style: Theme.of(context).textTheme.labelLarge!.copyWith(
                                 color: Colors.black,
                                 letterSpacing: 0.5,

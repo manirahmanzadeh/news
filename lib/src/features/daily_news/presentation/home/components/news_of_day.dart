@@ -49,7 +49,7 @@ class NewsOfTheDay extends StatelessWidget {
                       Theme.of(context).textTheme.headlineSmall!.copyWith(fontWeight: FontWeight.bold, height: 1.25, color: Colors.white),
                 ),
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () => BlocProvider.of<HomeBloc>(context).goToArticle(context, article),
                   style: TextButton.styleFrom(padding: EdgeInsets.zero),
                   child: Row(
                     children: [
