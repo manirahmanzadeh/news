@@ -9,6 +9,7 @@ import 'package:news_app/src/features/authentication/presentation/register/scree
 import 'package:news_app/src/features/daily_news/presentation/article_detail/article_screen.dart';
 import 'package:news_app/src/features/daily_news/presentation/discover/screens/discover_screen.dart';
 import 'package:news_app/src/features/daily_news/presentation/home/screens/home_screen.dart';
+import 'package:news_app/src/features/daily_news/presentation/saved_article/saved_article.dart';
 
 class AppRoutes {
   static Map<String, Widget Function(BuildContext)> routes = {
@@ -22,5 +23,6 @@ class AppRoutes {
     EmailScreen.routeName: (context) => const EmailScreen(),
     ChangePasswordScreen.routeName: (context) => const ChangePasswordScreen(),
     ArticleScreen.routeName: (context) => const ArticleScreen(),
+    SavedArticles.routeName: (context) => const SavedArticles(),
   };
 }

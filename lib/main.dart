@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:news_app/firebase_options.dart';
+import 'package:news_app/src/core/bloc/article/local/local_article_bloc.dart';
 import 'package:news_app/src/core/localization/locale_bloc.dart';
 import 'package:news_app/src/core/localization/locale_eevent.dart';
 import 'package:news_app/src/core/localization/locale_state.dart';
@@ -47,6 +48,9 @@ class App extends StatelessWidget {
           create: (context) => sl(),
         ),
         BlocProvider<ProfileBloc>(
+          create: (context) => sl(),
+        ),
+        BlocProvider<LocalArticlesBloc>(
           create: (context) => sl(),
         ),
       ],

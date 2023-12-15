@@ -94,19 +94,10 @@ class ArticleTileSmall extends StatelessWidget {
                     ),
                     const SizedBox(width: 5),
                     Text(
-                      '${DateTime.now().difference(article!.publishedAt!).inHours} hours ago',
+                      '${DateTime.now().difference(DateTime.parse(article!.publishedAt!)).inHours} hours ago',
                       style: const TextStyle(fontSize: 12),
                     ),
                     const SizedBox(width: 20),
-                    // const Icon(
-                    //   Icons.visibility,
-                    //   size: 18,
-                    // ),
-                    // const SizedBox(width: 5),
-                    // Text(
-                    //   '${article.} views',
-                    //   style: const TextStyle(fontSize: 12),
-                    // ),
                   ],
                 ),
               ],
