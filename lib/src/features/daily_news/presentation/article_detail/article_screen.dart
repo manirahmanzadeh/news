@@ -51,9 +51,9 @@ class _ArticleScreen extends StatelessWidget {
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             BlocProvider.of<LocalArticlesBloc>(context).add(SaveArticle(article));
-            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Article Saved!')));
+            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Article Saved!')));
           },
-          child: Icon(Icons.save_alt),
+          child: const Icon(Icons.save_alt),
         ),
       ),
     );
