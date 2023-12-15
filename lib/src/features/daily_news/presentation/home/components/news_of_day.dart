@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/src/core/components/custom_tag.dart';
 import 'package:news_app/src/core/components/image_container.dart';
+import 'package:news_app/src/core/components/shimmer/shimmer_loading_widget.dart';
 
 import '../bloc/home_bloc.dart';
 import '../bloc/home_state.dart';
@@ -16,8 +17,16 @@ class NewsOfTheDay extends StatelessWidget {
     return BlocBuilder<HomeBloc, HomeState>(
       builder: (_, state) {
         if (state is LoadingHomeState) {
-          return const Center(
-            child: CircularProgressIndicator(),
+          return ShimmerLoading(
+            isLoading: true,
+            child: ImageContainer(
+              height: MediaQuery.of(context).size.height * 0.45,
+              width: double.infinity,
+              padding: const EdgeInsets.all(20.0),
+              imageUrl: '',
+              gradientBlur: true,
+              child: Container(),
+            ),
           );
         } else {
           final article = state.articles!.first;

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/src/core/components/bottom_nav_bar.dart';
 import 'package:news_app/src/core/components/drawer.dart';
+import 'package:news_app/src/core/components/shimmer/shimmer_screen_widget.dart';
+import 'package:news_app/src/features/daily_news/presentation/home/bloc/home_state.dart';
 import 'package:news_app/src/injection_container.dart';
 
 import '../bloc/home_bloc.dart';
@@ -45,12 +47,30 @@ class _HomeScreen extends StatelessWidget {
       bottomNavigationBar: const BottomNavBar(index: 0),
       extendBodyBehindAppBar: true,
       drawer: const AppDrawer(),
-      body: ListView(
-        padding: EdgeInsets.zero,
-        children: const [
-          NewsOfTheDay(),
-          BreakingNews(),
-        ],
+      body: BlocBuilder<HomeBloc, HomeState>(
+        builder: (_, state) {
+          return AnimatedSwitcher(
+            duration: const Duration(milliseconds: 350),
+            child: (state is LoadingHomeState)
+                ? ShimmerScreen(
+                    enabled: true,
+                    child: ListView(
+                      padding: EdgeInsets.zero,
+                      children: const [
+                        NewsOfTheDay(),
+                        BreakingNews(),
+                      ],
+                    ),
+                  )
+                : ListView(
+                    padding: EdgeInsets.zero,
+                    children: const [
+                      NewsOfTheDay(),
+                      BreakingNews(),
+                    ],
+                  ),
+          );
+        },
       ),
     );
   }
