@@ -67,7 +67,9 @@ class AppTextFormField extends StatelessWidget {
                 ),
               )
             : null,
-        hintStyle: Theme.of(context).textTheme.labelLarge,
+        hintStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
+              color: const Color(0xFF9098B1),
+            ),
         hintText: hint,
       ),
       keyboardType: TextInputType.text,

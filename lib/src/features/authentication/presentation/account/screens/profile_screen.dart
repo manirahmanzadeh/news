@@ -96,6 +96,7 @@ class ProfileScreen extends StatelessWidget {
                   ),
                 ),
                 ListTile(
+                  onTap: () => staticProfileBloc.goToChangePassword(context),
                   leading: SvgPicture.asset(
                     'assets/icons/passphrase.svg',
                     height: 16,

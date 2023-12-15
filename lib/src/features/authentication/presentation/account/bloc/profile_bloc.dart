@@ -4,6 +4,7 @@ import 'package:news_app/src/features/authentication/domain/usecases/edit_user_u
 import 'package:news_app/src/features/authentication/presentation/account/bloc/profile_event.dart';
 import 'package:news_app/src/features/authentication/presentation/account/bloc/profile_state.dart';
 import 'package:news_app/src/features/authentication/presentation/account/screens/changename_screen.dart';
+import 'package:news_app/src/features/authentication/presentation/account/screens/changepasword_screen.dart';
 import 'package:news_app/src/features/authentication/presentation/account/screens/email_screen.dart';
 import 'package:news_app/src/features/authentication/presentation/bloc/auth/auth_bloc.dart';
 
@@ -68,6 +69,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
 
   String? name;
   String? email;
+  String? password;
 
   onNameSaved(String? value) {
     name = value;
@@ -75,6 +77,10 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
 
   onEmailSaved(String? value) {
     email = value;
+  }
+
+  onPasswordSaved(String? value) {
+    password = value;
   }
 
   submitChangeDisplayNameForm(BuildContext context) {
@@ -88,6 +94,13 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     if (formKey.currentState?.validate() ?? false) {
       formKey.currentState!.save();
       add(ChangeEmailProfileEvent(email: email!, context: context));
+    }
+  }
+
+  submitChangePasswordForm(BuildContext context) {
+    if (formKey.currentState?.validate() ?? false) {
+      formKey.currentState!.save();
+      add(ChangePasswordProfileEvent(password: password!, context: context));
     }
   }
 
@@ -166,6 +179,13 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     Navigator.pushNamed(
       context,
       EmailScreen.routeName,
+    );
+  }
+
+  void goToChangePassword(BuildContext context) {
+    Navigator.pushNamed(
+      context,
+      ChangePasswordScreen.routeName,
     );
   }
 }
