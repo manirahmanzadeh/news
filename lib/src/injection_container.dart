@@ -5,6 +5,7 @@ import 'package:news_app/src/core/localization/locale_bloc.dart';
 import 'package:news_app/src/features/authentication/data/data_sources/firebase_auth_service.dart';
 import 'package:news_app/src/features/authentication/data/repository/auth_repository_impl.dart';
 import 'package:news_app/src/features/authentication/domain/repository/auth_repository.dart';
+import 'package:news_app/src/features/authentication/domain/usecases/edit_user_usecases.dart';
 import 'package:news_app/src/features/authentication/domain/usecases/get_current_user_usecase.dart';
 import 'package:news_app/src/features/authentication/domain/usecases/send_recovery_email_usecase.dart';
 import 'package:news_app/src/features/authentication/domain/usecases/signin_email_password.dart';
@@ -12,6 +13,7 @@ import 'package:news_app/src/features/authentication/domain/usecases/signin_face
 import 'package:news_app/src/features/authentication/domain/usecases/signing_google_usecase.dart';
 import 'package:news_app/src/features/authentication/domain/usecases/signout.dart';
 import 'package:news_app/src/features/authentication/domain/usecases/signup_email_password.dart';
+import 'package:news_app/src/features/authentication/presentation/account/bloc/profile_bloc.dart';
 import 'package:news_app/src/features/daily_news/data/data_sources/local/app_database.dart';
 import 'package:news_app/src/features/daily_news/domain/usecases/get_saved_article.dart';
 import 'package:news_app/src/features/daily_news/domain/usecases/remove_article.dart';
@@ -60,12 +62,17 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<SendRecoveryEmailUseCase>(SendRecoveryEmailUseCase(sl()));
   sl.registerSingleton<SignInWithGoogleUseCase>(SignInWithGoogleUseCase(sl()));
   sl.registerSingleton<SignInWithFacebookUseCase>(SignInWithFacebookUseCase(sl()));
+  sl.registerSingleton<ChangeDisplayNameUseCase>(ChangeDisplayNameUseCase(sl()));
+  sl.registerSingleton<ChangeEmailUseCase>(ChangeEmailUseCase(sl()));
+  sl.registerSingleton<ChangePasswordUseCase>(ChangePasswordUseCase(sl()));
+  sl.registerSingleton<SendVerifyEmailUseCase>(SendVerifyEmailUseCase(sl()));
 
   ///Blocs
 
   ///Global:
   sl.registerFactory<LocaleBloc>(() => LocaleBloc());
   sl.registerFactory<AuthBloc>(() => AuthBloc(sl(), sl(), sl(), sl(), sl(), sl(), sl()));
+  sl.registerFactory<ProfileBloc>(() => ProfileBloc(sl(), sl(), sl(), sl()));
 
   ///Features:
   sl.registerFactory<HomeBloc>(() => HomeBloc(sl()));

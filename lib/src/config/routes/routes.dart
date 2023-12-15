@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/src/features/authentication/presentation/account/screens/changename_screen.dart';
 import 'package:news_app/src/features/authentication/presentation/account/screens/profile_screen.dart';
 import 'package:news_app/src/features/authentication/presentation/register/screens/forget_password_screen.dart';
 import 'package:news_app/src/features/authentication/presentation/register/screens/login_screen.dart';
@@ -15,6 +16,7 @@ class AppRoutes {
     HomeScreen.routeName: (context) => const HomeScreen(),
     DiscoverScreen.routeName: (context) => const DiscoverScreen(),
     ProfileScreen.routeName: (context) => const ProfileScreen(),
+    ChangeNameScreen.routeName: (context) => const ChangeNameScreen(),
     ArticleScreen.routeName: (context) => const ArticleScreen(),
   };
 }

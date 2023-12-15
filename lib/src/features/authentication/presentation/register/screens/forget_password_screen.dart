@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:news_app/src/core/components/app_text_form_field.dart';
+import 'package:news_app/src/core/utils/validators.dart';
 
+import '../../../../../core/components/app_button.dart';
 import '../../bloc/auth/auth_bloc.dart';
 import '../../bloc/auth/auth_state.dart';
 import '../bloc/register_bloc.dart';
-import '../components/signIn_component.dart';
-import '../components/text_field_component.dart';
 
 class ForgetPasswordScreen extends StatelessWidget {
   const ForgetPasswordScreen({super.key});
@@ -77,16 +78,16 @@ class _ForgetPasswordScreen extends StatelessWidget {
                   const SizedBox(
                     height: 28,
                   ),
-                  RegisterTextFormField(
-                    title: 'Your Email',
+                  AppTextFormField(
+                    hint: 'Your Email',
                     icon: 'assets/icons/email.svg',
-                    validator: registerBloc.emailValidator,
+                    validator: AppValidator.emailValidator,
                     onSaved: registerBloc.onSavedEmail,
                   ),
                   const SizedBox(
                     height: 16,
                   ),
-                  SignInButtonComponent(
+                  AppButton(
                     onTap: registerBloc.submitForgetPasswordForm,
                     labelText: 'Send Recovery Email',
                   ),

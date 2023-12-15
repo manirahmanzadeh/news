@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class SignInButtonComponent extends StatelessWidget {
-  const SignInButtonComponent({
+class AppButton extends StatelessWidget {
+  const AppButton({
     Key? key,
     required this.onTap,
     required this.labelText,

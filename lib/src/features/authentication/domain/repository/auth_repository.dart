@@ -16,4 +16,12 @@ abstract class AuthRepository {
   Future<void> signIngWithGoogle();
 
   Future<void> signIngWithFacebook();
+
+  Future<void> changeDisplayName(String displayName);
+
+  Future<void> changePassword(String password);
+
+  Future<void> changeEmail(String email);
+
+  Future<void> sendVerifyEmail();
 }

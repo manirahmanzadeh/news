@@ -1,41 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class SecureTextFieldComponent extends StatefulWidget {
-  const SecureTextFieldComponent({
+class AppTextFormField extends StatelessWidget {
+  const AppTextFormField({
     Key? key,
-    required this.title,
-    required this.icon,
-    required this.onSaved,
-    required this.validator,
+    this.hint,
+    this.icon,
+    this.onSaved,
+    this.validator,
   }) : super(key: key);
-  final String title;
-  final String icon;
-  final Function(String?) onSaved;
-  final String? Function(String?) validator;
-
-  @override
-  State<SecureTextFieldComponent> createState() => _SecureTextFieldComponentState();
-}
-
-class _SecureTextFieldComponentState extends State<SecureTextFieldComponent> {
-  bool _isObscure = true;
-
-  void _changeObscure() {
-    setState(() {
-      _isObscure = !_isObscure;
-    });
-  }
+  final String? hint;
+  final String? icon;
+  final Function(String?)? onSaved;
+  final String? Function(String?)? validator;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      onSaved: onSaved,
+      validator: validator,
       style: Theme.of(context).textTheme.bodyMedium!.copyWith(
             color: const Color(0xFF9098B1),
           ),
-      onSaved: widget.onSaved,
-      validator: widget.validator,
-      obscureText: _isObscure,
       decoration: InputDecoration(
         isDense: true,
         contentPadding: const EdgeInsets.symmetric(
@@ -72,27 +58,20 @@ class _SecureTextFieldComponentState extends State<SecureTextFieldComponent> {
             color: Color(0xFFEBF0FF),
           ),
         ),
-        prefixIcon: Padding(
-          padding: const EdgeInsets.all(16),
-          child: SvgPicture.asset(widget.icon, height: 16,),
-        ),
-        suffixIcon: InkWell(
-          onTap: _changeObscure,
-          child: Padding(
-            padding: const EdgeInsets.all(16),
-            child: SvgPicture.asset(
-              _isObscure ? 'assets/icons/eye-slash-solid.svg' : 'assets/icons/eye-solid.svg',
-              height: 16,
-            ),
-          ),
-        ),
-        hintText: widget.title,
-        hintStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
-              color: const Color(0xFF9098B1),
-            ),
+        prefixIcon: icon != null
+            ? Padding(
+                padding: const EdgeInsets.all(16),
+                child: SvgPicture.asset(
+                  icon!,
+                  height: 16,
+                ),
+              )
+            : null,
+        hintStyle: Theme.of(context).textTheme.labelLarge,
+        hintText: hint,
       ),
       keyboardType: TextInputType.text,
-      cursorColor: Colors.blue,
+      cursorColor: Colors.black,
       textAlign: TextAlign.left,
     );
   }

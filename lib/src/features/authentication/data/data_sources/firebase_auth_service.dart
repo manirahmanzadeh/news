@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:news_app/src/core/constants/constants.dart';
 
 class FirebaseAuthService {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
@@ -48,6 +49,36 @@ class FirebaseAuthService {
         .signInWithCredential(
           credential,
         )
+        .onError((error, stackTrace) => throw (Exception(error)));
+  }
+
+  Future<void> changeDisplayName(String displayName) async {
+    await _firebaseAuth.currentUser
+        ?.updateDisplayName(
+          displayName,
+        )
+        .onError((error, stackTrace) => throw (Exception(error)));
+  }
+
+  Future<void> changeEmail(String email) async {
+    await _firebaseAuth.currentUser
+        ?.updateEmail(
+          email,
+        )
+        .onError((error, stackTrace) => throw (Exception(error)));
+  }
+
+  Future<void> changePassword(String password) async {
+    await _firebaseAuth.currentUser
+        ?.updatePassword(
+          password,
+        )
+        .onError((error, stackTrace) => throw (Exception(error)));
+  }
+
+  Future<void> sendVerificationEmail() async {
+    await _firebaseAuth.currentUser
+        ?.sendEmailVerification(ActionCodeSettings(url: deeplLink))
         .onError((error, stackTrace) => throw (Exception(error)));
   }
 }

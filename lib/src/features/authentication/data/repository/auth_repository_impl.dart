@@ -76,4 +76,24 @@ class AuthRepositoryImpl implements AuthRepository {
 
     return _authService.signInWithCredentials(credential);
   }
+
+  @override
+  Future<void> changeDisplayName(String displayName) {
+    return _authService.changeDisplayName(displayName);
+  }
+
+  @override
+  Future<void> changeEmail(String email) {
+    return _authService.changeEmail(email);
+  }
+
+  @override
+  Future<void> changePassword(String password) {
+    return _authService.changePassword(password);
+  }
+
+  @override
+  Future<void> sendVerifyEmail() {
+    return _authService.sendVerificationEmail();
+  }
 }
