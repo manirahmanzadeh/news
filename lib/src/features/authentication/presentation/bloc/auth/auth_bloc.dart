@@ -63,7 +63,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     try {
       await _signInWithGoogleUseCase();
       emit(const LoadedAuthState());
-      ScaffoldMessenger.of(event.context).showSnackBar(SnackBar(content: Text('Redirecting!')));
+      Navigator.pushReplacementNamed(
+        event.context,
+        HomeScreen.routeName,
+      );
     } catch (e) {
       emit(const LoadedAuthState());
       print('error');
@@ -77,7 +80,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     try {
       await _signInWithFacebookUseCase();
       emit(const LoadedAuthState());
-      ScaffoldMessenger.of(event.context).showSnackBar(SnackBar(content: Text('Redirecting!')));
+      Navigator.pushReplacementNamed(
+        event.context,
+        HomeScreen.routeName,
+      );
     } catch (e) {
       emit(const LoadedAuthState());
       ScaffoldMessenger.of(event.context).showSnackBar(SnackBar(content: Text(e.toString())));
