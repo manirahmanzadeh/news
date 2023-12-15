@@ -63,9 +63,12 @@ class FirebaseAuthService {
   Future<void> changeEmail(String email) async {
     await _firebaseAuth.currentUser
         ?.updateEmail(
-          email,
-        )
-        .onError((error, stackTrace) => throw (Exception(error)));
+      email,
+    )
+        .onError((error, stackTrace) {
+      print(error);
+      throw (Exception(error));
+    });
   }
 
   Future<void> changePassword(String password) async {

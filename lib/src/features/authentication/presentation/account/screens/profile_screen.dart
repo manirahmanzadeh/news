@@ -68,6 +68,7 @@ class ProfileScreen extends StatelessWidget {
                   onTap: () => staticProfileBloc.goToChangeName(context),
                 ),
                 ListTile(
+                  onTap: () => staticProfileBloc.goToChangeEmail(context),
                   leading: SvgPicture.asset(
                     'assets/icons/email.svg',
                     height: 16,

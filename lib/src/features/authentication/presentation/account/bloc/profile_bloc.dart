@@ -4,6 +4,7 @@ import 'package:news_app/src/features/authentication/domain/usecases/edit_user_u
 import 'package:news_app/src/features/authentication/presentation/account/bloc/profile_event.dart';
 import 'package:news_app/src/features/authentication/presentation/account/bloc/profile_state.dart';
 import 'package:news_app/src/features/authentication/presentation/account/screens/changename_screen.dart';
+import 'package:news_app/src/features/authentication/presentation/account/screens/email_screen.dart';
 import 'package:news_app/src/features/authentication/presentation/bloc/auth/auth_bloc.dart';
 
 class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
@@ -57,10 +58,23 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
 
   bool hasPhoto(BuildContext context) => getUserPhotoUrl(context) != null;
 
+  bool verifyNeed(BuildContext context) {
+    final user = BlocProvider.of<AuthBloc>(context).getCurrentUser()!;
+    if (user.email != null && !user.emailVerified) {
+      return true;
+    }
+    return false;
+  }
+
   String? name;
+  String? email;
 
   onNameSaved(String? value) {
     name = value;
+  }
+
+  onEmailSaved(String? value) {
+    email = value;
   }
 
   submitChangeDisplayNameForm(BuildContext context) {
@@ -68,6 +82,17 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       formKey.currentState!.save();
       add(ChangeDisplayNameProfileEvent(displayName: name!, context: context));
     }
+  }
+
+  submitChangeEmailForm(BuildContext context) {
+    if (formKey.currentState?.validate() ?? false) {
+      formKey.currentState!.save();
+      add(ChangeEmailProfileEvent(email: email!, context: context));
+    }
+  }
+
+  verifyEmail(BuildContext context) {
+    add(SendVerifyEmailProfileEvent(context: context));
   }
 
   _onChangeDisplayNameEvent(ChangeDisplayNameProfileEvent event, Emitter<ProfileState> emit) async {
@@ -134,6 +159,13 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     Navigator.pushNamed(
       context,
       ChangeNameScreen.routeName,
+    );
+  }
+
+  void goToChangeEmail(BuildContext context) {
+    Navigator.pushNamed(
+      context,
+      EmailScreen.routeName,
     );
   }
 }

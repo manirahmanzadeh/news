@@ -1,132 +1,92 @@
-// import 'package:flutter/material.dart';
-// import 'package:provider/provider.dart';
-// import 'package:vrouter/vrouter.dart';
-// import '../providers/email_provider.dart';
-//
-//
-// class EmailPage extends StatelessWidget {
-//   const EmailPage({Key? key}) : super(key: key);
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     final email = context.vRouter.historyState['email'] ?? 'email';
-//     return ChangeNotifierProvider(
-//       create: (context) => EmailProvider(context, email),
-//       child: const _EmailPage(),
-//     );
-//   }
-// }
-//
-// class _EmailPage extends StatelessWidget {
-//   const _EmailPage({Key? key}) : super(key: key);
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     final provider = context.watch<EmailProvider>();
-//     final staticProvider = context.read<EmailProvider>();
-//     return Scaffold(
-//       appBar: AppBar(
-//         leading: IconButton(
-//           onPressed: () => context.vRouter.pop(),
-//           icon: const Icon(Icons.arrow_back_ios),
-//         ),
-//         elevation: 0,
-//         title: const Text(
-//           'Email',
-//         ),
-//       ),
-//       body: Padding(
-//         padding: const EdgeInsets.symmetric(horizontal: 16),
-//         child: Column(
-//           crossAxisAlignment: CrossAxisAlignment.start,
-//           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//           children: [
-//             Column(
-//               mainAxisSize: MainAxisSize.min,
-//               crossAxisAlignment: CrossAxisAlignment.start,
-//               children: [
-//                 const SizedBox(
-//                   height: 16,
-//                 ),
-//                 Text(
-//                   'Change Email',
-//                   style: Theme.of(context).textTheme.titleSmall,
-//                 ),
-//                 const SizedBox(
-//                   height: 12,
-//                 ),
-//                 TextField(
-//                   style: Theme.of(context).textTheme.labelLarge,
-//                   decoration: InputDecoration(
-//                     border: OutlineInputBorder(
-//                       borderRadius: BorderRadius.circular(5),
-//                       borderSide: const BorderSide(color: Color(0xFFEBF0FF)),
-//                     ),
-//                     disabledBorder: OutlineInputBorder(
-//                       borderRadius: BorderRadius.circular(5),
-//                       borderSide: const BorderSide(color: Color(0xFFEBF0FF)),
-//                     ),
-//                     enabledBorder: OutlineInputBorder(
-//                       borderRadius: BorderRadius.circular(5),
-//                       borderSide: const BorderSide(color: Color(0xFFEBF0FF)),
-//                     ),
-//                     focusedBorder: OutlineInputBorder(
-//                       borderRadius: BorderRadius.circular(5),
-//                       borderSide: const BorderSide(color: Color(0xFFEBF0FF)),
-//                     ),
-//                     hintStyle: Theme.of(context).textTheme.labelLarge,
-//                     hintText: staticProvider.email,
-//                   ),
-//                 ),
-//                 const SizedBox(
-//                   height: 8,
-//                 ),
-//                 Text(
-//                   'We Will Send verification to your New Email',
-//                   style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-//                     color: const Color(0xFF40BFFF)
-//                   ),
-//                 ),
-//               ],
-//             ),
-//             Column(
-//               mainAxisSize: MainAxisSize.min,
-//               children: [
-//                 ElevatedButton(
-//                   style: ButtonStyle(
-//                     backgroundColor: MaterialStateProperty.all(Colors.blue),
-//                     foregroundColor: MaterialStateProperty.all(Colors.white),
-//                     shape: MaterialStateProperty.all(
-//                       RoundedRectangleBorder(
-//                         borderRadius: BorderRadius.circular(8),
-//                       ),
-//                     ),
-//                   ),
-//                   onPressed: () {},
-//                   child: Row(
-//                     mainAxisAlignment: MainAxisAlignment.center,
-//                     children: [
-//                       Padding(
-//                         padding: const EdgeInsets.all(16),
-//                         child: Text(
-//                           'Save',
-//                           style:
-//                           Theme.of(context).textTheme.titleSmall!.copyWith(
-//                             color: Colors.white,
-//                           ),
-//                         ),
-//                       ),
-//                     ],
-//                   ),
-//                 ),
-//                 const SizedBox(
-//                   height: 16,
-//                 ),
-//               ],
-//             )
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:news_app/src/core/components/app_button.dart';
+import 'package:news_app/src/core/components/app_text_form_field.dart';
+import 'package:news_app/src/core/utils/validators.dart';
+import 'package:news_app/src/features/authentication/presentation/account/bloc/profile_state.dart';
+
+import '../bloc/profile_bloc.dart';
+
+class EmailScreen extends StatelessWidget {
+  const EmailScreen({Key? key}) : super(key: key);
+
+  static const routeName = '/email';
+
+  @override
+  Widget build(BuildContext context) {
+    final profileBloc = BlocProvider.of<ProfileBloc>(context, listen: true);
+    final staticProfileBloc = BlocProvider.of<ProfileBloc>(context, listen: false);
+    return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: () => Navigator.pop(context),
+          icon: const Icon(Icons.arrow_back_ios),
+        ),
+        elevation: 0,
+        title: const Text(
+          'Name',
+        ),
+      ),
+      body: BlocBuilder<ProfileBloc, ProfileState>(
+        builder: (_, state) {
+          if (state is LoadingProfileState) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          } else {
+            return Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Form(
+                key: staticProfileBloc.formKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      child: ListView(
+                        children: [
+                          const SizedBox(
+                            height: 16,
+                          ),
+                          Text(
+                            'Email',
+                            style: Theme.of(context).textTheme.titleSmall,
+                          ),
+                          const SizedBox(
+                            height: 12,
+                          ),
+                          AppTextFormField(
+                            hint: staticProfileBloc.getUserEmail(context),
+                            validator: AppValidator.emailValidator,
+                            onSaved: staticProfileBloc.onEmailSaved,
+                          ),
+                          const SizedBox(
+                            height: 24,
+                          ),
+                          if (profileBloc.verifyNeed(context))
+                            InkWell(
+                              onTap: () => staticProfileBloc.verifyEmail(context),
+                              child: Text(
+                                'Verify Email',
+                                style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: const Color(0xFF9098B1)),
+                              ),
+                            ),
+                        ],
+                      ),
+                    ),
+                    AppButton(
+                      onTap: () => staticProfileBloc.submitChangeEmailForm(context),
+                      labelText: 'Save',
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                  ],
+                ),
+              ),
+            );
+          }
+        },
+      ),
+    );
+  }
+}
